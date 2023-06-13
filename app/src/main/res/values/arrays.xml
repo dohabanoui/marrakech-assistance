@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="hotels_common_queries">
+        <item>5 stars hotels</item>
+        <item>hotel nea to jamma e fena</item>
+    </string-array>
+    
+</resources>

@@ -237,6 +237,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginBottom="32dp"
         android:elevation="4dp"
         android:id="@+id/wheatherCard"
         app:layout_constraintTop_toBottomOf="@+id/gridLayout"
@@ -291,7 +292,7 @@
 
     </RelativeLayout>
 
-            <LinearLayout
+          <!--  <LinearLayout
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -386,6 +387,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        tools:ignore="MissingConstraints,TextSizeCheck" />
+        tools:ignore="MissingConstraints,TextSizeCheck" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

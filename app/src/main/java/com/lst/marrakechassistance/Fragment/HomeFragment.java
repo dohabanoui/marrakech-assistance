@@ -24,17 +24,13 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.lst.marrakechassistance.Activity.HotelsActivity;
 import com.lst.marrakechassistance.Activity.MustVisitActivity;
 import com.lst.marrakechassistance.Activity.RestaurantsActivity;
 import com.lst.marrakechassistance.Activity.SearchActivity;
-import com.lst.marrakechassistance.Adapter.HotelMainAdapter;
 import com.lst.marrakechassistance.Model.Hotel;
 import com.lst.marrakechassistance.R;
-import com.lst.marrakechassistance.utils.HotelUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,9 +43,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -86,6 +79,8 @@ public class HomeFragment extends Fragment {
         // define The search Bar
         // We're not doing the search here so for that We will Make A new SearchActivity
         EditText searchBar = rootView.findViewById(R.id.recherche);
+        searchBar.setFocusable(false);
+        searchBar.setClickable(true);
         searchBar.setOnClickListener((view)->{
                     Intent intent = new Intent(getContext(), SearchActivity.class);
                     startActivity(intent);
@@ -146,7 +141,7 @@ public class HomeFragment extends Fragment {
             public void onLocationChanged(Location location) {
                 userLocation = location;
                 // Calculate distances to hotels
-                calculateDistancesToHotels();
+                //calculateDistancesToHotels();
 
                 // Stop listening for location updates
                 locationManager.removeUpdates(this);
@@ -164,44 +159,9 @@ public class HomeFragment extends Fragment {
         // Load the hotels From the local Data
         //Todo: {execute the fetching data in a separate thread}
 
-        hotels = (ArrayList<Hotel>) calculateDistancesToHotels();
-
-        RecyclerView nearRecyclerView = rootView.findViewById(R.id.recyclerViewNear);
-        nearRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        HotelMainAdapter adapter = new HotelMainAdapter(hotels);
-        nearRecyclerView.setAdapter(adapter);
-
-
-
-        RecyclerView popularRecyclerView = rootView.findViewById(R.id.recyclerViewPopular);
-        popularRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
-        popularRecyclerView.setAdapter(adapter);
-
-
+        /*hotels = (ArrayList<Hotel>) new HotelUtil(getContext()).getAllHotels();*/
         return  rootView;
     }
-
-    private List<Hotel> calculateDistancesToHotels() {
-        List<Hotel> hotelsList = new HotelUtil(getContext()).loadHotelsFromCSV(); // Load hotels data from CSV
-        if (userLocation != null && hotelsList != null) {
-            for (Hotel hotel : hotelsList) {
-                Location hotelLocation = new Location("");
-                hotelLocation.setLatitude(hotel.getLatitude());
-                hotelLocation.setLongitude(hotel.getLongitude());
-                float distance = userLocation.distanceTo(hotelLocation);
-                hotel.setDistance(distance);
-            }
-            // Sort hotels by distance
-            Collections.sort(hotelsList, new Comparator<Hotel>() {
-                @Override
-                public int compare(Hotel hotel1, Hotel hotel2) {
-                    return Float.compare(hotel1.getDistance(), hotel2.getDistance());
-                }
-            });
-        }
-        return hotelsList;
-    }
-
 
     private boolean isConnectedToInternet() {
         // Check The connectivity of The user

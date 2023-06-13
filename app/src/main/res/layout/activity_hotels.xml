@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".Activity.HotelsActivity">
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/hotelsRecyclerView"
         android:scrollbars="vertical"/>
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -19,6 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <include layout="@layout/item_placeholder" />
+
             <include layout="@layout/item_placeholder" />
 
             <include layout="@layout/item_placeholder" />

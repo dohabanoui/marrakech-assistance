@@ -1,19 +1,18 @@
 package com.lst.marrakechassistance.Model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Hotel implements Serializable {
-    private String title;
+    private String name;
     private String address;
-    private String description;
-    private int bed ;
-    private int path;
-    private int price ;
-    private String pic;
-    private Boolean wifi;
-    private double latitude;
-    private double longitude;
-    private float distance;
+    private String phone;
+    private String website;
+    private String type;
+    private String price;
+    private double lat, lng;
+    float distance;
 
     public void setDistance(float distance) {
         this.distance = distance;
@@ -23,109 +22,101 @@ public class Hotel implements Serializable {
         return distance;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public Hotel(String title, double latitude, double longitude) {
-        this.title = title;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public Hotel(String title, String address, String description, int bed, int path, int price, String pic, Boolean wifi) {
-        this.title = title;
+    public Hotel(String name, String address, String phone, String website, String type, String price) {
+        this.name = name;
         this.address = address;
-        this.description = description;
-        this.bed = bed;
-        this.path = path;
+        this.phone = phone;
+        this.website = website;
+        this.type = type;
         this.price = price;
-        this.pic = pic;
-        this.wifi = wifi;
     }
 
-    public Hotel(String title, String address, int price, String pic, double latitude, double longitude) {
-        this.title = title;
+    public Hotel(String name, String address, String phone, String website, String price, String type, double lat, double lng) {
+        this.name = name;
         this.address = address;
+        this.phone = phone;
+        this.website = website;
         this.price = price;
-        this.pic = pic;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.type = type;
+        this.lat = lat;
+        this.lng = lng;
     }
 
-    public String getTitle() {
-        return title;
+    public double getLat() {
+        return lat;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getPrice() {
+        return price;
     }
 
-    public String getAddress() {
-        return address;
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getDescription() {
-        return description;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
-    public int getBed() {
-        return bed;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setBed(int bed) {
-        this.bed = bed;
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
-    public int getPath() {
-        return path;
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
-    public void setPath(int path) {
-        this.path = path;
+    public String getName() {
+        return name;
     }
 
-    public int getPrice() {
-        return price;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    @NonNull
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", website='" + website + '\'' +
+                ", type='" + type + '\'' +
+                ", lat=" + lat +
+                ", lng=" + lng +
+                '}';
     }
 
-    public String getPic() {
-        return pic;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPic(String pic) {
-        this.pic = pic;
+    public String getWebsite() {
+        return website;
     }
 
-    public Boolean getWifi() {
-        return wifi;
-    }
-
-    public void setWifi(Boolean wifi) {
-        this.wifi = wifi;
+    public String getType() {
+        return type;
     }
 }
