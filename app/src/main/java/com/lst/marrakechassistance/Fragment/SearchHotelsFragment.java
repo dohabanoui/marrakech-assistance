@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.lst.marrakechassistance.Activity.ResultsActivity;
+import com.lst.marrakechassistance.Activity.ResultsHotelsActivity;
 import com.lst.marrakechassistance.Adapter.CommonQueryAdapter;
 import com.lst.marrakechassistance.R;
 
@@ -124,7 +124,7 @@ public class SearchHotelsFragment extends Fragment {
                 String query = search.getText().toString().trim();
 
                 // Start the ResultsActivity with the selected category and query
-                Intent intent = new Intent(getContext(), ResultsActivity.class);
+                Intent intent = new Intent(getContext(), ResultsHotelsActivity.class);
                 intent.putExtra("category", "hotels");
                 intent.putExtra("query", query);
                 startActivity(intent);

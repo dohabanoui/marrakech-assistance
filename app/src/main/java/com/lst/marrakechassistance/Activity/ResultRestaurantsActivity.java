@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,49 +11,50 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.lst.marrakechassistance.Adapter.HotelResultAdapter;
-import com.lst.marrakechassistance.Model.HotelModelClass;
+import com.lst.marrakechassistance.Adapter.RestoAdapter;
+import com.lst.marrakechassistance.Model.RestoModelClass;
 import com.lst.marrakechassistance.R;
-import com.lst.marrakechassistance.utils.HotelUtil;
+import com.lst.marrakechassistance.utils.RestaurantUtil;
 
 import java.util.ArrayList;
 
-public class ResultsActivity extends AppCompatActivity {
+public class ResultRestaurantsActivity extends AppCompatActivity {
     private ShimmerFrameLayout mShimmerViewContainer;
     RecyclerView recyclerView;
-    ArrayList<HotelModelClass> hotels;
-    HotelResultAdapter adapter;
+    ArrayList<RestoModelClass> restaurants;
+    RestoAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_results);
+        setContentView(R.layout.activity_result_restaurants);
         Intent intent = getIntent();
         String selectedCategory = intent.getStringExtra("category");
         String query = intent.getStringExtra("query");
         mShimmerViewContainer = findViewById(R.id.shimmerLayout);
 
-        recyclerView = findViewById(R.id.hotelsRecyclerView);
+        recyclerView = findViewById(R.id.restRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Perform the data retrieval operation asynchronously
-        new ResultsActivity.HotelDataLoadingTask().execute(query);
-
+        new RestaurantsDataLoader().execute(query);
     }
-    private class HotelDataLoadingTask extends AsyncTask<String, Void, ArrayList<HotelModelClass>> {
+
+    private class RestaurantsDataLoader extends AsyncTask<String , Void, ArrayList<RestoModelClass>> {
+
         @Override
-        protected ArrayList<HotelModelClass> doInBackground(String... params) {
-            String query = params[0];
-            return (ArrayList<HotelModelClass>) new HotelUtil(ResultsActivity.this).getHotels(query);
+        protected ArrayList<RestoModelClass> doInBackground(String... strings) {
+            String query = strings[0];
+            return (ArrayList<RestoModelClass>) new RestaurantUtil(ResultRestaurantsActivity.this).getRestaurants(query);
         }
         @Override
-        protected void onPostExecute(ArrayList<HotelModelClass> result) {
+        protected void onPostExecute(ArrayList<RestoModelClass> result) {
             // Hide the shimmer animation
             mShimmerViewContainer.stopShimmer();
             mShimmerViewContainer.setVisibility(View.GONE);
 
-            // Update the RecyclerView with the retrieved hotels
-            hotels = result;
-            adapter = new HotelResultAdapter(hotels);
+            restaurants = result;
+            adapter = new RestoAdapter(restaurants, ResultRestaurantsActivity.this);
+
             recyclerView.setAdapter(adapter);
         }
     }
