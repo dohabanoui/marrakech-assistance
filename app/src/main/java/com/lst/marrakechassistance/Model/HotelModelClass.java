@@ -17,6 +17,7 @@ public class HotelModelClass {
     String props ;
     String price ;
     String gps;
+    String imgUrl;
 
 
     public HotelModelClass(String name, String description, String stars, String img, String type, String address, String website, String phone, String near_att, String near_res, String props, String price) {

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.lst.marrakechassistance.Model.HotelModelClass;
 import com.lst.marrakechassistance.R;
 
@@ -34,6 +36,13 @@ public class HotelResultAdapter extends RecyclerView.Adapter<HotelResultAdapter.
         HotelModelClass hotel = hotels.get(position);
         holder.name.setText(hotel.getName());
         holder.type.setText(hotel.getType());
+
+        Glide.with(holder.itemView.getContext())
+                .load(hotel.getImg())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.hotel_ph)
+                        .error(R.drawable.hotel_ph))
+                .into(holder.img);
 
         if (hotel.getStars().equals("unclassified")){
             holder.rate.setVisibility(View.GONE);

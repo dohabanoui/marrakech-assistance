@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.lst.marrakechassistance.Model.AttractionModelClass;
 import com.lst.marrakechassistance.R;
 
@@ -42,13 +44,12 @@ public class AttractionsAdapter extends RecyclerView.Adapter<AttractionsAdapter.
         holder.name.setText(aData.get(position).getName());
         holder.adress.setText(aData.get(position).getAdress());
         holder.cat.setText(aData.get(position).getCategory());
-
-         @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = aContext.getResources().getDrawable(
-                    aContext.getResources().getIdentifier(aData.get(position).getImg(),"drawable", aContext.getPackageName()));
-
-         holder.img.setBackground(drawable);
-
-
+        Glide.with(holder.itemView.getContext())
+                .load(aData.get(position).getImg())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.hotel_ph)
+                        .error(R.drawable.hotel_ph))
+                .into(holder.img);
     }
 
     @Override

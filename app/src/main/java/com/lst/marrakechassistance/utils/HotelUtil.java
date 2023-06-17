@@ -17,30 +17,39 @@ public class HotelUtil {
     public HotelUtil(Context context) {
         this.context = context;
     }
-    public List<Hotel> getAllHotels(){
-        ArrayList<Hotel> hotels = new ArrayList<>();
+    public List<Hotel> getAllHotel(){
+        ArrayList<Hotel> hotels= new ArrayList<>();
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(context));
         }
         Python py = Python.getInstance();
         PyObject module = py.getModule("script");
-        List<PyObject> res = module.callAttr("get_hotels").asList();
+        List<PyObject> res = module.callAttr("getHotels").asList();
         for (PyObject item : res) {
             Map<PyObject, PyObject> data = item.asMap();
-            String name = data.get(PyObject.fromJava("title")).toString();
+            String title = data.get(PyObject.fromJava("Names")).toString();
             String address = data.get(PyObject.fromJava("address")).toString();
-            String tel = data.get(PyObject.fromJava("Tel")).toString();
+            String Tel = data.get(PyObject.fromJava("Tel")).toString();
             String website = data.get(PyObject.fromJava("website")).toString();
-            String type = data.get(PyObject.fromJava("Type")).toString();
-            String price = data.get(PyObject.fromJava("Price")).toString();
-           String description =data.get(PyObject.fromJava("Description")).toString();
-            double lat = data.get(PyObject.fromJava("lat")).toDouble();
-            double lng = data.get(PyObject.fromJava("lng")).toDouble();
+            String Description = data.get(PyObject.fromJava("Description")).toString();
+            String Price = data.get(PyObject.fromJava("Price")).toString();
+            String Type = data.get(PyObject.fromJava("Type")).toString();
+            String Properties = data.get(PyObject.fromJava("Properties")).toString();
+            String languages = data.get(PyObject.fromJava("languages")).toString();
+            String Styles = data.get(PyObject.fromJava("Styles")).toString();
+            String check_in = data.get(PyObject.fromJava("check in")).toString();
+            String Check_out = data.get(PyObject.fromJava("Check-out")).toString();
+            String info = data.get(PyObject.fromJava("info")).toString();
+            String near_res = data.get(PyObject.fromJava("near_res")).toString();
+            String near_att = data.get(PyObject.fromJava("near_att")).toString();
+            String Stars = data.get(PyObject.fromJava("Stars")).toString();
+            String imgUrl = data.get(PyObject.fromJava("img_url")).toString();
 
-            hotels.add(new Hotel(name, address, tel, website, price,type, lat, lng));
+            hotels.add(new Hotel(title, address, Tel, website, Description,Price, Type, Properties,languages,Styles,check_in,Check_out,info,near_res,near_att,Stars, imgUrl));
         }
         return hotels;
     }
+
 
     public List<HotelModelClass> getHotels(String query){
         ArrayList<HotelModelClass> hotels = new ArrayList<>();
@@ -66,7 +75,7 @@ public class HotelUtil {
             data.setWebsite(rr[6]);
             data.setNear_att(rr[8]);
             data.setNear_res(rr[7]);
-            data.setImg("h"+rr[11]);
+            data.setImg(rr[11]);
             data.setGps(rr[12]);
             hotels.add(data);
         }

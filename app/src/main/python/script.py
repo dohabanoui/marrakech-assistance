@@ -4,22 +4,35 @@ import pandas as pd
 from rank_bm25 import BM25Okapi
 
 
-def get_hotels():
-    filename = join(dirname(__file__), 'Hotels.csv')
-    # filename = 'HotelsFinal.csv'
-    data = pd.read_csv(filename).fillna(' ')
+def getHotels():
+    filename = join(dirname(__file__), 'HotelsFinalV2.csv')
+    data = pd.read_csv(filename)
+    data.fillna(' ')
     return list(data.to_dict(orient='records'))
 
-def get_restaurants():
-    filename = join(dirname(__file__), "RestaurantsFinal.csv")
-    data = pd.read_csv(filename).fillna(' ')
+def getRestaurants():
+    filename = join(dirname(__file__), 'RestaurantsFinal.csv')
+    data = pd.read_csv(filename)
+    data.fillna(' ')
     return list(data.to_dict(orient='records'))
 
-def get_attractions():
-    filename = join(dirname(__file__), "AttractionsFinal.csv")
-    data = pd.read_csv(filename).fillna(' ')
-    return list(data.to_dict(orient='records'))
+def getAttractions():
+    # filename = join(dirname(_file_), 'AttractionsFinal.csv')
+    filename = 'AttractionsFinal.csv'
+    df = pd.read_csv(filename)
+    res= []
+    for i in range(len(df)):
+        res.append([df["Names"][i],df["category"][i],df["adress"][i],df["description"][i],df["WebSite"][i], \
+                    df["Suggested duration"][i],df["open during"][i],df["near_res"][i], \
+                    df["near_att"][i],df["info"][i]])
+    return tuple(res)
 
+
+def getTransport():
+    filename = join(dirname(__file__), 'line_stat.csv')
+    data = pd.read_csv(filename)
+    data.fillna(' ')
+    return list(data.to_dict(orient='records'))
 
 def to_lower(sample):
     return sample.lower()

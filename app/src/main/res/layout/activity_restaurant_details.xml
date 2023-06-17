@@ -6,4 +6,428 @@
     android:layout_height="match_parent"
     tools:context=".Activity.RestaurantDetailsActivity">
 
+    <ImageView
+        android:id="@+id/imgDetailRestaurant"
+        android:layout_width="470dp"
+        android:layout_height="310dp"
+        android:transitionName="background_image_transition"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/restaurant"
+        tools:targetApi="lollipop" />
+
+    <ImageView
+        android:id="@+id/down_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="34dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgDetailRestaurant"
+        app:layout_constraintTop_toTopOf="@+id/imgDetailRestaurant"
+        app:srcCompat="@drawable/arrow_down"/>
+    <View
+        android:id="@+id/viewRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#70000000"
+        app:layout_constraintBottom_toBottomOf="@+id/imgDetailRestaurant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <ImageView
+        android:id="@+id/imagelocationRestaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="-60dp"
+        android:src="@drawable/baseline_attach_money_24"
+        app:layout_constraintBottom_toTopOf="@+id/viewRestaurant"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/titleRestaurantDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Restaurant Riad"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/imagelocationRestaurant"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="@+id/viewRestaurant" />
+
+
+    <TextView
+        android:id="@+id/priceRestaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Marrakech 40000 Maroc"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_regular"
+        app:layout_constraintBottom_toBottomOf="@+id/imagelocationRestaurant"
+        app:layout_constraintStart_toEndOf="@+id/imagelocationRestaurant"
+        app:layout_constraintTop_toTopOf="@+id/imagelocationRestaurant"
+        />
+
+
+    <FrameLayout
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgDetailRestaurant"
+        app:layout_constraintEnd_toEndOf="@+id/viewRestaurant"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/favoriteBackground"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="Favorite Background"
+            android:src="@drawable/favoris_bg" />
+
+        <ImageView
+            android:id="@+id/favoriteIcon"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_gravity="center"
+            android:contentDescription="Favorite Icon"
+            android:src="@drawable/favoris_noir" />
+
+    </FrameLayout>
+
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgDetailRestaurant"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/round_location_on_24" />
+
+                <TextView
+                    android:id="@+id/localisationRestaurant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Addresse"
+                    android:textSize="15sp" />
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/call" />
+
+                <TextView
+                    android:id="@+id/ContactRestaurant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="+212 600-756845"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Trendy-Charming"
+                android:textSize="13dp"
+                tools:ignore="TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="About"
+                android:textSize="15sp" />
+
+
+
+            <TextView
+                android:id="@+id/descriptionRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="But you see, it's not me It's not my family In your
+                   head, in your head, they are fighting
+With their tanks and their bombs
+And their bombs and their guns
+In your head, in your head, they are crying"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="4dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    app:srcCompat="@drawable/input_vert" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Horraire" />
+
+                    <TextView
+                        android:id="@+id/arrivalRestaurant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="15:00 - 23:00" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Cuisine"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/cuisineRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Marocaine"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Meals"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/mealsRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Végétariens bienvenus"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="feature"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/featuresRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Choix végétaliens"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Special diets"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/special_diets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Choix végétaliens"
+                android:textSize="15sp" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Near Restaurants"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/near_resRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Choix végétaliens"
+                android:textSize="15sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Near Restaurants"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/near_hotRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Near Restaurants"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Near Attractions"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/near_attRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Choix végétaliens"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="More Informations"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/infoRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="More Informations"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Evaluation"
+                android:textSize="15sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBarRestaurantview"
+                style="?android:attr/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/app_name"
+                android:max="5"
+                android:numStars="5"
+                android:progressTint="@color/colorPrimary"
+                android:rating="4.5"
+                android:stepSize="0.5"
+                tools:targetApi="lollipop" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

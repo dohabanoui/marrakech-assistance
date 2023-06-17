@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.lst.marrakechassistance.Adapter.HotelResultAdapter;
 import com.lst.marrakechassistance.Adapter.RestoAdapter;
 import com.lst.marrakechassistance.Model.RestoModelClass;
 import com.lst.marrakechassistance.R;

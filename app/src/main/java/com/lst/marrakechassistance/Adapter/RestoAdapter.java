@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.lst.marrakechassistance.Model.RestoModelClass;
 import com.lst.marrakechassistance.R;
 
@@ -39,12 +41,12 @@ public class RestoAdapter extends RecyclerView.Adapter<RestoAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.name.setText(rData.get(position).getName());
         holder.adress.setText(rData.get(position).getAddress());
-
-       // holder.img.setBackground(Drawable.createFromPath("drawable/resbtn"));
-
-         //Drawable drawable = rContext.getResources().getDrawable(
-           //         rContext.getResources().getIdentifier(rData.get(position).getImg(),"drawable", rContext.getPackageName()));
-         //holder.img.setBackground(drawable);
+        Glide.with(holder.itemView.getContext())
+                .load(rData.get(position).getImg())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.hotel_ph)
+                        .error(R.drawable.hotel_ph))
+                .into(holder.img);
     }
 
     @Override

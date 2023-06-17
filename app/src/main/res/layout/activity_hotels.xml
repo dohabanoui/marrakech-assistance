@@ -7,9 +7,9 @@
     android:padding="16dp"
     tools:context=".Activity.HotelsActivity">
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewhotel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/hotelsRecyclerView"
         android:scrollbars="vertical"/>
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerLayout"

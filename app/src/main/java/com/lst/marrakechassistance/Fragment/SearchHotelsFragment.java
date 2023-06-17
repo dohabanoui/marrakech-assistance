@@ -2,12 +2,18 @@ package com.lst.marrakechassistance.Fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaRecorder;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Environment;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,7 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -28,15 +36,40 @@ import com.lst.marrakechassistance.Activity.ResultsHotelsActivity;
 import com.lst.marrakechassistance.Adapter.CommonQueryAdapter;
 import com.lst.marrakechassistance.R;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class SearchHotelsFragment extends Fragment {
+
+
     RecyclerView recyclerView;
     FloatingActionButton floatingActionButton;
     EditText search;
+
+    // speech recognizer used when the user is offline
     SpeechRecognizer mSpeechRecognizer;
+
+    // Media recorder for record an audio file in case if the user is Online
+    private static final String TAG = "SearchHotelsFragment";
+    private static final int PERMISSION_REQUEST_CODE = 1;
+    private File audioFile;
+
+    private boolean isRecording = false;
+    MediaRecorder mediaRecorder;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -123,19 +156,29 @@ public class SearchHotelsFragment extends Fragment {
                 // Retrieve the entered query
                 String query = search.getText().toString().trim();
 
-                // Start the ResultsActivity with the selected category and query
-                Intent intent = new Intent(getContext(), ResultsHotelsActivity.class);
-                intent.putExtra("category", "hotels");
-                intent.putExtra("query", query);
-                startActivity(intent);
+                startResultsActivity(query);
                 return true;
             }
             return false;
         });
 
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+       /* if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             checkPermissions();
+        }*/
+
+        // Check if permissions are granted, and request them if not
+        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        boolean allPermissionsGranted = true;
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(getActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
+                allPermissionsGranted = false;
+                break;
+            }
         }
+        if (!allPermissionsGranted) {
+            ActivityCompat.requestPermissions(getActivity(), permissions, PERMISSION_REQUEST_CODE);
+        }
+
 
         // implement the vocal search feature
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
@@ -144,18 +187,163 @@ public class SearchHotelsFragment extends Fragment {
                 floatingActionButton.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.colorAccent));
                 search.setText("");
                 search.setHint("Listening ...");
-                mSpeechRecognizer.startListening(mSpeechRecognizerIntent_EN);
+                if (isConnectedToInternet()){
+                    //  strart The recording
+                    startRecording();
+                    Toast.makeText(getContext(), "Recording audio and sending to API", Toast.LENGTH_SHORT).show();
+                }else{
+                    mSpeechRecognizer.startListening(mSpeechRecognizerIntent_EN);
+                }
             } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                 floatingActionButton.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.colorPrimary));
-                mSpeechRecognizer.stopListening();
+                if (isConnectedToInternet()){
+                    // Stop the recording
+                    stopRecording();
+                    Toast.makeText(getContext(), "Stopping recording", Toast.LENGTH_SHORT).show();
+                } else {
+                    mSpeechRecognizer.stopListening();
+                }
+
             }
             return false;
         });
         return view;
     }
 
+    private boolean isConnectedToInternet() {
+        // Check The connectivity of The user
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        return false;
+    }
 
     private void checkPermissions() {
         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO}, 1);
     }
+
+
+    private void startRecording() {
+
+        // Check if recording is already in progress
+        if (isRecording) {
+            return;
+        }
+
+        // Set the recording flag
+        isRecording = true;
+
+        // Generate a unique audio file name
+        String audioFileName = "recording_" + UUID.randomUUID().toString() + ".wav";
+
+        // Create the audio file using the external storage directory
+        File directory = getActivity().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+        audioFile = new File(directory, audioFileName);
+        // Initialize MediaRecorder and configure audio source, output format, and output file
+        mediaRecorder = new MediaRecorder();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+        mediaRecorder.setOutputFile(audioFile.getAbsolutePath());
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+
+        try {
+            // Prepare and start audio recording
+            mediaRecorder.prepare();
+            mediaRecorder.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void stopRecording() {
+        // Check if recording is in progress
+        if (!isRecording) {
+            return;
+        }
+
+        // Reset the recording flag
+        isRecording = false;
+
+        if (mediaRecorder != null) {
+            try {
+                // Stop and release the MediaRecorder
+                mediaRecorder.stop();
+                mediaRecorder.release();
+                uploadFile();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void uploadFile() {
+        // Build the HTTP Client
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS) // Set read timeout
+                .writeTimeout(30, TimeUnit.SECONDS) // Set write timeout
+                .build();
+
+        // Create a multipart request body
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", audioFile.getName(), RequestBody.create(MediaType.parse("audio/wav"), audioFile))
+                .build();
+
+        // Create the HTTP request
+        Request request = new Request.Builder()
+                .url("http://192.168.1.121:5000/upload")
+                .header("Content-Type", "application/json")
+                .post(requestBody)
+                .build();
+
+        // Make the request asynchronously
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.e(TAG, "Request failed: " + e.getMessage());
+                getActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "Upload failed", Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String res = response.body().string();
+
+                getActivity().runOnUiThread(() -> startResultsActivity(res));
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            boolean allPermissionsGranted = true;
+            for (int grantResult : grantResults) {
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                    allPermissionsGranted = false;
+                    break;
+                }
+            }
+
+            if (allPermissionsGranted) {
+                // Permissions are granted, start audio recording
+                startRecording();
+            } else {
+                // Permissions are denied, handle the case accordingly
+                Toast.makeText(getActivity(), "Permissions denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void startResultsActivity(String query) {
+        Intent intent = new Intent(getContext(), ResultsHotelsActivity.class);
+        intent.putExtra("category", "hotels");
+        intent.putExtra("query", query);
+        startActivity(intent);
+    }
+
 }

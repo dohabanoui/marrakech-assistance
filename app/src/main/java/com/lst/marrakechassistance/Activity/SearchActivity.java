@@ -47,7 +47,7 @@ public class SearchActivity extends AppCompatActivity implements SearchCategorie
             SearchRestaurantsFragment fragment = new SearchRestaurantsFragment();
             replaceFragment(fragment);
         } else if (Objects.equals(category, "transport")) {
-            Intent intent = new Intent(this, TransportsActivity.class);
+            Intent intent = new Intent(this, TransportActivity.class);
             startActivity(intent);
 
         } else if (Objects.equals(category, "activities")) {

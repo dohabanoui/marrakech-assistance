@@ -46,4 +46,7 @@
     <string name="common_search_queries">Common Search Queries</string>
     <string name="searching_for_restaurants">Searching for restaurants</string>
     <string name="attractions">Attractions</string>
+
+    <string name="mapbox_access_token">sk.eyJ1Ijoib3Vzc2FtYWVsaGQiLCJhIjoiY2xpaml3MTFhMDh0MjNxcGg0bm45eGp5ciJ9._n8UPscuh7Y89NzoJzZARA</string>
+
 </resources>

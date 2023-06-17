@@ -17,6 +17,7 @@ public class RestoModelClass {
     String near_hot;
     String gps;
 
+
     public RestoModelClass(String name, String address, String img, String description, String phone, String website, String kitchen, String feats, String meals, String spec_diets, String price, String near_att, String near_hot) {
         this.name = name;
         this.address = address;

@@ -26,9 +26,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.lst.marrakechassistance.Activity.HotelsActivity;
-import com.lst.marrakechassistance.Activity.MustVisitActivity;
+import com.lst.marrakechassistance.Activity.AttractionActivity;
 import com.lst.marrakechassistance.Activity.RestaurantsActivity;
 import com.lst.marrakechassistance.Activity.SearchActivity;
+import com.lst.marrakechassistance.Activity.TransportActivity;
 import com.lst.marrakechassistance.Model.Hotel;
 import com.lst.marrakechassistance.R;
 
@@ -104,10 +105,10 @@ public class HomeFragment extends Fragment {
                     Intent intent = new Intent(getContext(), RestaurantsActivity.class);
                     startActivity(intent);
                 } else if (viewId == R.id.FragTransport) {
-                    Intent intent = new Intent(getContext(), RestaurantsActivity.class);
+                    Intent intent = new Intent(getContext(), TransportActivity.class);
                     startActivity(intent);
                 } else if (viewId == R.id.FragMV) {
-                    Intent intent = new Intent(getContext(), MustVisitActivity.class);
+                    Intent intent = new Intent(getContext(), AttractionActivity.class);
                     startActivity(intent);
                 }
             });

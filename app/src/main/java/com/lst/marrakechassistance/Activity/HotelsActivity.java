@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.lst.marrakechassistance.R;
 import com.lst.marrakechassistance.utils.HotelUtil;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
 
 public class HotelsActivity extends AppCompatActivity {
 
@@ -31,8 +33,8 @@ public class HotelsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hotels);
         mShimmerViewContainer = findViewById(R.id.shimmerLayout);
 
-        recyclerView = findViewById(R.id.hotelsRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = findViewById(R.id.recyclerViewhotel);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         mShimmerViewContainer.startShimmer();
 
@@ -40,21 +42,11 @@ public class HotelsActivity extends AppCompatActivity {
         new HotelDataLoadingTask().execute();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-       mShimmerViewContainer.startShimmer();
-    }
 
-    @Override
-    public void onPause() {
-       mShimmerViewContainer.stopShimmer();
-        super.onPause();
-    }
     private class HotelDataLoadingTask extends AsyncTask<Void, Void, ArrayList<Hotel>> {
         @Override
         protected ArrayList<Hotel> doInBackground(Void... params) {
-            return (ArrayList<Hotel>) new HotelUtil(HotelsActivity.this).getAllHotels();
+            return (ArrayList<Hotel>) new HotelUtil(HotelsActivity.this).getAllHotel();
         }
 
         @Override
@@ -67,6 +59,17 @@ public class HotelsActivity extends AppCompatActivity {
             hotels = result;
             adapter = new HotelAdapter(hotels);
             recyclerView.setAdapter(adapter);
+            adapter.setOnItemClickListener(new HotelAdapter.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(View view, int position) {
+                    Hotel selectedHotel = hotels.get(position);
+
+                    Intent intent = new Intent(HotelsActivity.this, HotelDetailActivity.class);
+                    intent.putExtra("selectedHotel", selectedHotel);
+                    startActivity(intent);
+                }
+            });
         }
     }
 }
