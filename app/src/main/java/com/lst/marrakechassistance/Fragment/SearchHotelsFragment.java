@@ -20,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -32,9 +33,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.lst.marrakechassistance.Activity.MainActivity;
 import com.lst.marrakechassistance.Activity.ResultsHotelsActivity;
 import com.lst.marrakechassistance.Adapter.CommonQueryAdapter;
 import com.lst.marrakechassistance.R;
+import com.lst.marrakechassistance.utils.AppReference;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,6 +74,8 @@ public class SearchHotelsFragment extends Fragment {
     private boolean isRecording = false;
     MediaRecorder mediaRecorder;
 
+    // get the IP ADDRESS
+    String ipAddress;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -147,6 +152,9 @@ public class SearchHotelsFragment extends Fragment {
         CommonQueryAdapter adapter = new CommonQueryAdapter(queryList);
         recyclerView.setAdapter(adapter);
 
+        // set the click Listener for the adapter Elements
+        adapter.setOnItemClickListener(query -> startResultsActivity(query));
+
         // add the listener to the search EditText
         search = view.findViewById(R.id.editTextQuery);
         search.setOnEditorActionListener((textView, actionId, keyEvent) -> {
@@ -162,10 +170,6 @@ public class SearchHotelsFragment extends Fragment {
             return false;
         });
 
-       /* if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
-            checkPermissions();
-        }*/
-
         // Check if permissions are granted, and request them if not
         String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         boolean allPermissionsGranted = true;
@@ -179,6 +183,14 @@ public class SearchHotelsFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), permissions, PERMISSION_REQUEST_CODE);
         }
 
+        if (isConnectedToInternet()){
+            ipAddress = new AppReference(getContext()).getIpAddress();
+            if (ipAddress.equals("")){
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        }
 
         // implement the vocal search feature
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
@@ -187,7 +199,7 @@ public class SearchHotelsFragment extends Fragment {
                 floatingActionButton.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.colorAccent));
                 search.setText("");
                 search.setHint("Listening ...");
-                if (isConnectedToInternet()){
+                if (isConnectedToInternet() && !ipAddress.equals("")){
                     //  strart The recording
                     startRecording();
                     Toast.makeText(getContext(), "Recording audio and sending to API", Toast.LENGTH_SHORT).show();
@@ -294,7 +306,7 @@ public class SearchHotelsFragment extends Fragment {
 
         // Create the HTTP request
         Request request = new Request.Builder()
-                .url("http://192.168.1.121:5000/upload")
+                .url("http://"+ ipAddress + ":5000/upload")
                 .header("Content-Type", "application/json")
                 .post(requestBody)
                 .build();

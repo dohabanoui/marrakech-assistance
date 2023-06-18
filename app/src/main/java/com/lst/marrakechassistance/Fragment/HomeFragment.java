@@ -2,6 +2,7 @@ package com.lst.marrakechassistance.Fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,6 +33,7 @@ import com.lst.marrakechassistance.Activity.SearchActivity;
 import com.lst.marrakechassistance.Activity.TransportActivity;
 import com.lst.marrakechassistance.Model.Hotel;
 import com.lst.marrakechassistance.R;
+import com.lst.marrakechassistance.utils.AppReference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -88,6 +90,9 @@ public class HomeFragment extends Fragment {
                 }
         );
 
+        if (isConnectedToInternet()){
+            showIpAddressDialog();
+        }
 
         // Initialise The gridLayout item
         // Make a GridLayout item to reference the View GridLayout
@@ -270,6 +275,34 @@ public class HomeFragment extends Fragment {
             default:
                 return R.drawable.icon_default;
         }
+    }
+    private void showIpAddressDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Enter IP Address");
+
+        // Inflate the dialog layout
+        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_ip_address, null);
+        final EditText editTextIpAddress = dialogView.findViewById(R.id.editTextIpAddress);
+        builder.setView(dialogView);
+
+        // Set positive button action
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            String ipAddress = editTextIpAddress.getText().toString().trim();
+            if (!ipAddress.equals("")){
+                AppReference appReference = new AppReference(getContext());
+                appReference.saveIpAddress(ipAddress);
+            }
+        });
+
+        // Set negative button action (optional)
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            // Handle cancel action, e.g., show an error message or exit the app
+        });
+
+        // Create and show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.show();
     }
 
 }

@@ -7,11 +7,14 @@
         android:id="@+id/input_layout_ip_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textAlignment="center"
         android:hint="Enter IP Address">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextIpAddress"
             android:layout_width="match_parent"
+            android:fontFamily="@font/poppins_regular"
             android:layout_height="wrap_content"
             android:inputType="text" />
 

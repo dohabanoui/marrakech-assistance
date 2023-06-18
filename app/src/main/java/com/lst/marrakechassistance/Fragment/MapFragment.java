@@ -153,44 +153,44 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Permiss
         });
     }
 
-    @Override
-    public void onMapReady(MapboxMap mapboxMap) {
-        this.mapboxMap = mapboxMap;
+   @Override
+   public void onMapReady(MapboxMap mapboxMap) {
+       this.mapboxMap = mapboxMap;
 
+       mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+           @Override
+           public void onStyleLoaded(@NonNull Style style) {
+               // Move the camera to the desired starting point
+               LatLng startingLatLng = new LatLng(31.6295, -7.9811);
+               CameraPosition cameraPosition = new CameraPosition.Builder()
+                       .target(startingLatLng)
+                       .zoom(12)
+                       .build();
+               mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 4000, null);
 
-        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
-            @Override
-            public void onStyleLoaded(@NonNull Style style) {
-                // Déplace la caméra vers Marrakech
-                LatLng marrakechLatLng = new LatLng(31.6295, -7.9811);
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(marrakechLatLng)
-                        .zoom(12)
-                        .build();
-                mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 4000, null);
+               // Enable location component
+               enableLocationComponent(style);
 
-                // Activer la localisation sur la carte
-                enableLocationComponent(style);
+               // Create and configure a SymbolLayer for position names
+               SymbolLayer symbolLayer = new SymbolLayer("symbol-layer-id", "source-id");
+               symbolLayer.setProperties(
+                       textField("{name}"), // Field used to display the position name
+                       textSize(
+                               interpolate(
+                                       exponential(1.5f),
+                                       zoom(),
+                                       stop(150, 200f), // Text size when zoom is 10 or less
+                                       stop(15, 200f)   // Text size when zoom is 15 or more
+                               )
+                       )
+               );
 
-                // Créer et configurer une SymbolLayer pour les noms des positions
-                SymbolLayer symbolLayer = new SymbolLayer("symbol-layer-id", "source-id");
-                symbolLayer.setProperties(
-                        textField("{name}"), // Champ utilisé pour afficher le nom de la position
-                        textSize(
-                                interpolate(
-                                        exponential(1.5f),
-                                        zoom(),
-                                        stop(150, 200f), // Taille des textes lorsque le zoom est de 10 ou moins
-                                        stop(15, 200f)  // Taille des textes lorsque le zoom est de 15 ou plus
-                                )
-                        )
-                );
+               // Add the SymbolLayer to the map's style
+               style.addLayer(symbolLayer);
+           }
+       });
+   }
 
-                // Ajouter la SymbolLayer au style de la carte
-                style.addLayer(symbolLayer);
-            }
-        });
-    }
 
     private void updateDestination(double latitude, double longitude) {
         destinationLatitude = latitude;

@@ -2,7 +2,19 @@
 <resources>
     <string-array name="hotels_common_queries">
         <item>5 stars hotels</item>
-        <item>hotel nea to jamma e fena</item>
+        <item>hotel near to jamma e fena</item>
+        <item>Hotel de luxe</item>
+        <item></item>
+    </string-array>
+    <string-array name="restaurants_common_queries">
+        <item>5 stars hotels</item>
+        <item>hotel near to jamma e fena</item>
+    </string-array>
+
+    <string-array name="attraction_common_queries">
+        <item>Menara Mall</item>
+        <item>El koutoubia</item>
+        <item>Jardin majorelle</item>
     </string-array>
     
 </resources>

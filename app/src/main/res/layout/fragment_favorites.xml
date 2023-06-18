@@ -5,10 +5,28 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.FavoritesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Favorite Fragment" />
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageViewNotLoggedIn"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:src="@drawable/folder"
+            android:layout_margin="32dp"/>
+
+        <TextView
+            android:id="@+id/textViewNotLoggedIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_logged_in_message"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="32sp"
+            android:textColor="#808080"/>
+
+    </LinearLayout>
 
 </FrameLayout>

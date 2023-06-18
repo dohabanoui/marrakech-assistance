@@ -33,9 +33,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.lst.marrakechassistance.Activity.MainActivity;
 import com.lst.marrakechassistance.Activity.ResultAttractionsActivity;
 import com.lst.marrakechassistance.Adapter.CommonQueryAdapter;
 import com.lst.marrakechassistance.R;
+import com.lst.marrakechassistance.utils.AppReference;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,6 +73,7 @@ public class SearchActivitiesFragment extends Fragment {
 
     private boolean isRecording = false;
     MediaRecorder mediaRecorder;
+    String ipAddress;
 
     public SearchActivitiesFragment() {
         // Required empty public constructor
@@ -137,7 +140,7 @@ public class SearchActivitiesFragment extends Fragment {
             }
         });
 
-        String[] commonQueries = getResources().getStringArray(R.array.hotels_common_queries);
+        String[] commonQueries = getResources().getStringArray(R.array.attraction_common_queries);
         List<String> queryList = new ArrayList<>();
         Collections.addAll(queryList, commonQueries);
 
@@ -149,6 +152,8 @@ public class SearchActivitiesFragment extends Fragment {
         recyclerView.addItemDecoration(itemDecoration);
         CommonQueryAdapter adapter = new CommonQueryAdapter(queryList);
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(query -> startResultsActivity(query));
 
         // add the listener to the search EditText
         search = view.findViewById(R.id.editTextQuery);
@@ -178,6 +183,16 @@ public class SearchActivitiesFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), permissions, PERMISSION_REQUEST_CODE);
         }
 
+        // Get The IPADDRESS
+        if (isConnectedToInternet()){
+            ipAddress = new AppReference(getContext()).getIpAddress();
+            if (ipAddress.equals("")){
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        }
+
         // implement the vocal search feature
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnTouchListener((view1, motionEvent) -> {
@@ -185,7 +200,7 @@ public class SearchActivitiesFragment extends Fragment {
                 floatingActionButton.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.colorAccent));
                 search.setText("");
                 search.setHint("Listening ...");
-                if (isConnectedToInternet()){
+                if (isConnectedToInternet() && !ipAddress.equals("")){
                     //  strart The recording
                     startRecording();
                     Toast.makeText(getContext(), "Recording audio and sending to API", Toast.LENGTH_SHORT).show();
@@ -288,7 +303,7 @@ public class SearchActivitiesFragment extends Fragment {
 
         // Create the HTTP request
         Request request = new Request.Builder()
-                .url("http://192.168.1.59:5000/upload")
+                .url("http://"+ ipAddress + ":5000/upload")
                 .header("Content-Type", "application/json")
                 .post(requestBody)
                 .build();
@@ -338,5 +353,4 @@ public class SearchActivitiesFragment extends Fragment {
         intent.putExtra("query", query);
         startActivity(intent);
     }
-
 }

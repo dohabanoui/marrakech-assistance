@@ -19,6 +19,14 @@ public class CommonQueryAdapter extends RecyclerView.Adapter<CommonQueryAdapter.
     public CommonQueryAdapter(List<String> queryList) {
         this.queryList = queryList;
     }
+    public interface OnItemClickListener {
+        void onItemClick(String query);
+    }
+
+    private OnItemClickListener mListener;
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener;
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     public void setQueryList(List<String> queryList) {
@@ -49,10 +57,19 @@ public class CommonQueryAdapter extends RecyclerView.Adapter<CommonQueryAdapter.
         public CommonQueryHolder(View itemView) {
             super(itemView);
             query = itemView.findViewById(R.id.edit_query);
+            // Set click listener for the item view
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION && mListener != null) {
+                    String query = queryList.get(position);
+                    mListener.onItemClick(query);
+                }
+            });
         }
 
         public void setQuery(String query){
             this.query.setText(query);
         }
+
     }
 }
