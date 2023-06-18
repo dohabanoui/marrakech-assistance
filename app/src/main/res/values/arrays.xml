@@ -3,18 +3,31 @@
     <string-array name="hotels_common_queries">
         <item>5 stars hotels</item>
         <item>hotel near to jamma e fena</item>
-        <item>Hotel de luxe</item>
-        <item></item>
+        <item>Luxury hotels </item>
+        <item>Hotels with pool</item>
+        <item>Hotels in Marrakech city center</item>
+        <item>All-inclusive hotels Marrakech</item>
+        <item>Hotels with spa</item>
     </string-array>
     <string-array name="restaurants_common_queries">
-        <item>5 stars hotels</item>
-        <item>hotel near to jamma e fena</item>
+        <item>Traditional Moroccan restaurants</item>
+        <item>Vegetarian, vegan restaurants</item>
+        <item>Rooftop restaurants </item>
+        <item>Restaurants near Jardin Majorelle</item>
+        <item>International cuisine restaurants </item>
+        <item>Restaurants with outdoor seating</item>
+        <item>Restaurants with views</item>
     </string-array>
 
     <string-array name="attraction_common_queries">
-        <item>Menara Mall</item>
-        <item>El koutoubia</item>
-        <item>Jardin majorelle</item>
+        <item>Jemaa el-Fnaa</item>
+        <item>Marrakech Medina</item>
+        <item>Bahia Palace</item>
+        <item>Koutoubia Mosque</item>
+        <item>Majorelle Garden</item>
+        <item>Saadian Tombs</item>
+        <item>El Badi Palace</item>
+        <item>Museums</item>
     </string-array>
     
 </resources>
