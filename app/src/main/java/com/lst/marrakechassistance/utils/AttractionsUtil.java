@@ -21,7 +21,7 @@ public class AttractionsUtil {
             Python.start(new AndroidPlatform(context));
         }
         Python py = Python.getInstance();
-        PyObject module = py.getModule("my script");
+        PyObject module = py.getModule("script");
         List<PyObject> res = module.callAttr("attractions", query).asList();
         for (int i = 0; i < res.size(); i++) {
             String[] rr=res.get(i).toJava(String[].class);

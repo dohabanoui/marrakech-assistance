@@ -45,8 +45,8 @@ public class RestaurantUtil {
             String near_res = data.get(PyObject.fromJava("near_res")).toString();
             String near_hot = data.get(PyObject.fromJava("near_hot")).toString();
             String near_att = data.get(PyObject.fromJava("near_att")).toString();
-
-            restaurants.add(new Restaurant(name, address, tel, website, about,price, cuisine, features,meals,guru_time,special_diets,info,near_res,near_hot,near_att));
+            String imgUrl = data.get(PyObject.fromJava("img_url")).toString();
+            restaurants.add(new Restaurant(name, address, tel, website, about,price, cuisine, features,meals,guru_time,special_diets,info,near_res,near_hot,near_att, imgUrl));
         }
         return restaurants;
     }
@@ -59,7 +59,7 @@ public class RestaurantUtil {
             Python.start(new AndroidPlatform(context));
         }
         Python py = Python.getInstance();
-        PyObject module = py.getModule("my script");
+        PyObject module = py.getModule("script");
         List<PyObject> res = module.callAttr("restos", query).asList();
         for(int i=0;i<res.size();i++) {
 

@@ -19,9 +19,10 @@ public class Restaurant implements Serializable {
     private String near_hot;
     private String near_att;
 
+    private String imgUrl;
 
 
-    public Restaurant(String name, String address, String phone, String website, String about, String price , String cuisine, String features, String meals, String guru_time , String special_diets, String info, String near_res , String near_hot, String near_att) {
+    public Restaurant(String name, String address, String phone, String website, String about, String price , String cuisine, String features, String meals, String guru_time , String special_diets, String info, String near_res , String near_hot, String near_att, String imgUrl) {
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -37,9 +38,16 @@ public class Restaurant implements Serializable {
         this.near_res=near_res;
         this.near_hot=near_hot;
         this.near_att = near_att;
+        this.imgUrl = imgUrl;
     }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
 
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public void setName(String name) {
         this.name = name;

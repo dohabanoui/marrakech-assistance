@@ -57,7 +57,7 @@ public class HotelUtil {
             Python.start(new AndroidPlatform(context));
         }
         Python py = Python.getInstance();
-        PyObject module = py.getModule("my script");
+        PyObject module = py.getModule("script");
         List<PyObject> res = module.callAttr("hotels", query).asList();
         for(int i=0;i<res.size();i++) {
 
@@ -73,8 +73,8 @@ public class HotelUtil {
             data.setAddress(rr[4]);
             data.setPhone(rr[5]);
             data.setWebsite(rr[6]);
-            data.setNear_att(rr[8]);
             data.setNear_res(rr[7]);
+            data.setNear_att(rr[8]);
             data.setImg(rr[11]);
             data.setGps(rr[12]);
             hotels.add(data);

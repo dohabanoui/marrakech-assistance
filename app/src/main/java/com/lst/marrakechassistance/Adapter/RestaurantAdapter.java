@@ -3,12 +3,15 @@ package com.lst.marrakechassistance.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.lst.marrakechassistance.Model.Restaurant;
 import com.lst.marrakechassistance.R;
 
@@ -37,9 +40,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.restaurantName.setText(restaurants.get(position).getName());
-        holder.restaurantAddress.setText(restaurants.get(position).getAddress());
-        holder.restaurantPrice.setText(restaurants.get(position).getPrice());
+        Restaurant currentRest = restaurants.get(position);
+        holder.restaurantName.setText(currentRest.getName());
+        holder.restaurantAddress.setText(currentRest.getAddress());
+        holder.restaurantPrice.setText(currentRest.getPrice());
+
+        Glide.with(holder.itemView.getContext())
+                        .load(currentRest.getImgUrl())
+                        .apply(new RequestOptions()
+                                .placeholder(R.drawable.hotel_ph))
+                                .error(R.drawable.hotel_ph)
+                        .into(holder.restImg);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +71,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         TextView restaurantName;
         TextView restaurantAddress;
         TextView restaurantPrice;
+        ImageView restImg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             restaurantName = itemView.findViewById(R.id.titleRestaurant);
             restaurantAddress = itemView.findViewById(R.id.addressRestaurant);
             restaurantPrice = itemView.findViewById(R.id.priceRestaurant);
+            restImg = itemView.findViewById(R.id.picRestaurant);
         }
     }
 }

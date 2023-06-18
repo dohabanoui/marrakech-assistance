@@ -186,11 +186,11 @@ public class SearchActivitiesFragment extends Fragment {
         // Get The IPADDRESS
         if (isConnectedToInternet()){
             ipAddress = new AppReference(getContext()).getIpAddress();
-            if (ipAddress.equals("")){
+           /* if (ipAddress.equals("")){
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();
-            }
+            }*/
         }
 
         // implement the vocal search feature
@@ -350,6 +350,7 @@ public class SearchActivitiesFragment extends Fragment {
 
     private void startResultsActivity(String query) {
         Intent intent = new Intent(getActivity(), ResultAttractionsActivity.class);
+        intent.putExtra("category", "attractions");
         intent.putExtra("query", query);
         startActivity(intent);
     }

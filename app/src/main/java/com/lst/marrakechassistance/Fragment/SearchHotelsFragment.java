@@ -183,13 +183,13 @@ public class SearchHotelsFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), permissions, PERMISSION_REQUEST_CODE);
         }
 
-        if (isConnectedToInternet()){
+       if (isConnectedToInternet()){
             ipAddress = new AppReference(getContext()).getIpAddress();
-            if (ipAddress.equals("")){
+           /* if (ipAddress.equals("")){
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();
-            }
+            }*/
         }
 
         // implement the vocal search feature
