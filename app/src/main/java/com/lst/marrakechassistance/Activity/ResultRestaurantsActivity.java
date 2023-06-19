@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.lst.marrakechassistance.Adapter.RestoAdapter;
-import com.lst.marrakechassistance.Model.RestoModelClass;
+import com.lst.marrakechassistance.Adapter.RestaurantResultAdapter;
+import com.lst.marrakechassistance.Model.Restaurant;
 import com.lst.marrakechassistance.R;
 import com.lst.marrakechassistance.utils.AppReference;
 import com.lst.marrakechassistance.utils.RestaurantUtil;
@@ -39,8 +39,8 @@ import okhttp3.Response;
 public class ResultRestaurantsActivity extends AppCompatActivity {
     private ShimmerFrameLayout mShimmerViewContainer;
     RecyclerView recyclerView;
-    ArrayList<RestoModelClass> restaurants;
-    RestoAdapter adapter;
+    ArrayList<Restaurant> restaurants;
+    RestaurantResultAdapter adapter;
     String ipAddress;
 
     @Override
@@ -94,32 +94,39 @@ public class ResultRestaurantsActivity extends AppCompatActivity {
                     String responseData = response.body().string();
                     try {
                         JSONArray jsonData = new JSONArray(responseData);
-                        ArrayList<RestoModelClass> temRestaurants = new ArrayList<>();
+                        ArrayList<Restaurant> temRestaurants = new ArrayList<>();
 
                         for (int i = 0; i < jsonData.length(); i++) {
                             JSONObject jsonObject = jsonData.getJSONObject(i);
-                            RestoModelClass restaurant = new RestoModelClass();
+                            Restaurant restaurant = new Restaurant();
                             restaurant.setName(jsonObject.getString("Names"));
                             restaurant.setAddress(jsonObject.getString("ad_adress"));
                             restaurant.setDescription(jsonObject.getString("ad_about"));
                             restaurant.setPhone(jsonObject.getString("ad_Phone"));
                             restaurant.setWebsite(jsonObject.getString("ad_WebSite"));
-                            restaurant.setKitchen(jsonObject.getString("ad_cuisine"));
-                            restaurant.setFeats(jsonObject.getString("ad_features"));
+                            restaurant.setCuisine(jsonObject.getString("ad_cuisine"));
+                            restaurant.setFeatures(jsonObject.getString("ad_features"));
                             restaurant.setMeals(jsonObject.getString("ad_meals"));
                             restaurant.setPrice(jsonObject.getString("ad_prices"));
                             restaurant.setNear_att(jsonObject.getString("near_att"));
                             restaurant.setNear_hot(jsonObject.getString("near_hot"));
-                            restaurant.setSpec_diets(jsonObject.getString("special_diets"));
-                            restaurant.setGps(jsonObject.getString("gps"));
-                            restaurant.setImg(jsonObject.getString("img_url"));
+                            restaurant.setSpecial_diets(jsonObject.getString("special_diets"));
+                            restaurant.setImgUrl(jsonObject.getString("img_url"));
                             temRestaurants.add(restaurant);
                         }
 
                       mShimmerViewContainer.stopShimmer();
                       mShimmerViewContainer.setVisibility(View.GONE);
-                      adapter = new RestoAdapter(temRestaurants, ResultRestaurantsActivity.this);
+                      adapter = new RestaurantResultAdapter(temRestaurants, ResultRestaurantsActivity.this);
                       recyclerView.setAdapter(adapter);
+                      adapter.setOnItemClickListener(new RestaurantResultAdapter.OnItemClickListener() {
+                          @Override
+                          public void onItemClick(View view, int position) {
+                              Intent intent = new Intent(ResultRestaurantsActivity.this, RestaurantDetailsActivity.class);
+                              intent.putExtra("selectedRestaurant", restaurants.get(position));
+                              startActivity(intent);
+                          }
+                      });
 
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
@@ -134,23 +141,31 @@ public class ResultRestaurantsActivity extends AppCompatActivity {
     }
 
     // asyncTask for getting the data from the local database
-    private class RestaurantsDataLoader extends AsyncTask<String , Void, ArrayList<RestoModelClass>> {
+    private class RestaurantsDataLoader extends AsyncTask<String , Void, ArrayList<Restaurant>> {
 
         @Override
-        protected ArrayList<RestoModelClass> doInBackground(String... strings) {
+        protected ArrayList<Restaurant> doInBackground(String... strings) {
             String query = strings[0];
-            return (ArrayList<RestoModelClass>) new RestaurantUtil(ResultRestaurantsActivity.this).getRestaurants(query);
+            return (ArrayList<Restaurant>) new RestaurantUtil(ResultRestaurantsActivity.this).getRestaurants(query);
         }
         @Override
-        protected void onPostExecute(ArrayList<RestoModelClass> result) {
+        protected void onPostExecute(ArrayList<Restaurant> result) {
             // Hide the shimmer animation
             mShimmerViewContainer.stopShimmer();
             mShimmerViewContainer.setVisibility(View.GONE);
 
             restaurants = result;
-            adapter = new RestoAdapter(restaurants, ResultRestaurantsActivity.this);
+            adapter = new RestaurantResultAdapter(restaurants, ResultRestaurantsActivity.this);
 
             recyclerView.setAdapter(adapter);
+            adapter.setOnItemClickListener(new RestaurantResultAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(ResultRestaurantsActivity.this, RestaurantDetailsActivity.class);
+                    intent.putExtra("selectedRestaurant", restaurants.get(position));
+                    startActivity(intent);
+                }
+            });
         }
     }
     private boolean isConnectedToInternet() {

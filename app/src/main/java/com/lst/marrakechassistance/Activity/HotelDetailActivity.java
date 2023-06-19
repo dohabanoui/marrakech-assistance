@@ -79,10 +79,10 @@ public class HotelDetailActivity extends AppCompatActivity {
                             .placeholder(R.drawable.hotel_ph)
                             .error(R.drawable.hotel_ph))
                     .into(hotelImg);
-            hotelTitle.setText(selectedHotel.getTitle());
+            hotelTitle.setText(selectedHotel.getName());
             hotelPrice.setText(selectedHotel.getPrice());
             hotelAddress.setText(selectedHotel.getAddress());
-            hotelPhone.setText(selectedHotel.getTel());
+            hotelPhone.setText(selectedHotel.getPhone());
             hotelType.setText(selectedHotel.getType());
             hotelDescription.setText(selectedHotel.getDescription());
             hotelStyle.setText(selectedHotel.getStyles());
@@ -98,14 +98,7 @@ public class HotelDetailActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HotelsActivity.class);
-
-                Pair[] pairs= new Pair[1];
-                pairs[0] = new Pair<View,String>(down_arrow,"backgroun_image_transition");
-
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(HotelDetailActivity.this,pairs);
-                startActivity(intent,options.toBundle());
-                finish();
+               onBackPressed();
             }
         });
     }

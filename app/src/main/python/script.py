@@ -17,15 +17,15 @@ def getRestaurants():
     return list(data.to_dict(orient='records'))
 
 def getAttractions():
-    # filename = join(dirname(_file_), 'AttractionsFinal.csv')
-    filename = 'AttractionsFinalV2.csv'
-    df = pd.read_csv(filename)
+    filename = join(dirname(__file__), 'AttractionsFinalV2.csv')
+    # filename = 'AttractionsFinalV2.csv'
+    data = pd.read_csv(filename).fillna(' ')
     res= []
-    for i in range(len(df)):
-        res.append([df["Names"][i],df["category"][i],df["adress"][i],df["description"][i],df["WebSite"][i], \
-                    df["Suggested duration"][i],df["open during"][i],df["near_res"][i], \
-                    df["near_att"][i],df["info"][i]])
-    return tuple(res)
+    #for i in range(len(df)):
+        #res.append([df["Names"][i],df["category"][i],df["adress"][i],df["description"][i],df["WebSite"][i], \
+                    # df["Suggested duration"][i],df["open during"][i],df["near_res"][i], \
+                    # df["near_att"][i],df["info"][i]])
+    return list(data.to_dict(orient='records'))
 
 
 def getTransport():

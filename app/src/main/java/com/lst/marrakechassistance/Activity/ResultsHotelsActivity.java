@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.lst.marrakechassistance.Adapter.HotelAdapter;
 import com.lst.marrakechassistance.Adapter.HotelResultAdapter;
-import com.lst.marrakechassistance.Model.HotelModelClass;
+import com.lst.marrakechassistance.Model.Hotel;
 import com.lst.marrakechassistance.R;
 import com.lst.marrakechassistance.utils.AppReference;
 import com.lst.marrakechassistance.utils.HotelUtil;
@@ -39,7 +40,7 @@ import okhttp3.Response;
 public class ResultsHotelsActivity extends AppCompatActivity {
     private ShimmerFrameLayout mShimmerViewContainer;
     RecyclerView recyclerView;
-    ArrayList<HotelModelClass> hotels;
+    ArrayList<Hotel> hotels;
     HotelResultAdapter adapter;
     String ipAddress;
 
@@ -88,23 +89,22 @@ public class ResultsHotelsActivity extends AppCompatActivity {
                     String responseData = response.body().string();
                     try {
                         JSONArray json = new JSONArray(responseData);
-                        ArrayList<HotelModelClass> tempHotels = new ArrayList<>();
+                        ArrayList<Hotel> tempHotels = new ArrayList<>();
                         for (int i = 0; i < json.length(); i++) {
                             JSONObject jsonObject = json.getJSONObject(i);
-                            HotelModelClass hotel = new HotelModelClass();
+                            Hotel hotel = new Hotel();
 
                             hotel.setName(jsonObject.getString("Names"));
                             hotel.setType(jsonObject.getString("Type"));
                             hotel.setStars(jsonObject.getString("Stars"));
                             hotel.setDescription(jsonObject.getString("Description"));
-                            hotel.setProps(jsonObject.getString("Properties"));
+                            hotel.setProperties(jsonObject.getString("Properties"));
                             hotel.setAddress(jsonObject.getString("address"));
                             hotel.setPhone(jsonObject.getString("Tel"));
                             hotel.setWebsite(jsonObject.getString("website"));
                             hotel.setNear_res(jsonObject.getString("near_res"));
                             hotel.setNear_att(jsonObject.getString("near_att"));
-                            hotel.setImg(jsonObject.getString("img_url"));
-                            hotel.setGps(jsonObject.getString("gps"));
+                            hotel.setImgUrl(jsonObject.getString("img_url"));
                             tempHotels.add(hotel);
                         }
                         // update the UI with the fetched data
@@ -114,6 +114,17 @@ public class ResultsHotelsActivity extends AppCompatActivity {
 
                             hotels = tempHotels;
                             adapter = new HotelResultAdapter(hotels);
+                            adapter.setOnItemClickListener(new HotelAdapter.OnItemClickListener() {
+
+                                @Override
+                                public void onItemClick(View view, int position) {
+                                    Hotel selectedHotel = hotels.get(position);
+
+                                    Intent intent = new Intent(ResultsHotelsActivity.this, HotelDetailActivity.class);
+                                    intent.putExtra("selectedHotel", selectedHotel);
+                                    startActivity(intent);
+                                }
+                            });
                             recyclerView.setAdapter(adapter);
                         });
 
@@ -132,14 +143,14 @@ public class ResultsHotelsActivity extends AppCompatActivity {
             new ResultsHotelsActivity.HotelDataLoadingTask().execute(query);
         }
     }
-    private class HotelDataLoadingTask extends AsyncTask<String, Void, ArrayList<HotelModelClass>> {
+    private class HotelDataLoadingTask extends AsyncTask<String, Void, ArrayList<Hotel>> {
         @Override
-        protected ArrayList<HotelModelClass> doInBackground(String... params) {
+        protected ArrayList<Hotel> doInBackground(String... params) {
             String query = params[0];
-            return (ArrayList<HotelModelClass>) new HotelUtil(ResultsHotelsActivity.this).getHotels(query);
+            return (ArrayList<Hotel>) new HotelUtil(ResultsHotelsActivity.this).getHotels(query);
         }
         @Override
-        protected void onPostExecute(ArrayList<HotelModelClass> result) {
+        protected void onPostExecute(ArrayList<Hotel> result) {
             // Hide the shimmer animation
             mShimmerViewContainer.stopShimmer();
             mShimmerViewContainer.setVisibility(View.GONE);
@@ -147,6 +158,17 @@ public class ResultsHotelsActivity extends AppCompatActivity {
             // Update the RecyclerView with the retrieved hotels
             hotels = result;
             adapter = new HotelResultAdapter(hotels);
+            adapter.setOnItemClickListener(new HotelAdapter.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(View view, int position) {
+                    Hotel selectedHotel = hotels.get(position);
+
+                    Intent intent = new Intent(ResultsHotelsActivity.this, HotelDetailActivity.class);
+                    intent.putExtra("selectedHotel", selectedHotel);
+                    startActivity(intent);
+                }
+            });
             recyclerView.setAdapter(adapter);
         }
     }

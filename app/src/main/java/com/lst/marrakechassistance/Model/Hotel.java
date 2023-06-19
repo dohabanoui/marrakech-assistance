@@ -3,136 +3,78 @@ package com.lst.marrakechassistance.Model;
 import java.io.Serializable;
 
 public class Hotel implements Serializable {
-    private String title;
-    private String address;
-    private String Tel;
-    private String Description;
-    private String website;
-    private String Price;
-    private String Type;
-    private String Properties;
-    private String languages;
-    private String Styles;
-    private String ChekIn;
-    private String CheckOut;
-    private String info;
-    private String near_res;
-    private String near_att;
-    private String Stars;
-    private String imgUrl;
 
+    private String name, address, phone, website, description, price, type, properties, languages, styles, check_in,  check_out,info,near_res,near_att, stars, imgUrl;
 
+    public Hotel() {
+    }
 
-
-    public Hotel(String title, String address, String Tel, String website, String Description, String Price, String Type , String Properties, String languages, String Styles, String ChekIn , String CheckOut, String info, String near_res, String near_att, String Stars, String imgUrl) {
-        this.title = title;
+    public Hotel(String name, String address, String phone, String website, String description, String price, String type, String properties, String languages, String styles, String check_in, String check_out, String info, String near_res, String near_att, String stars, String imgUrl) {
+        this.name = name;
         this.address = address;
-        this.Tel = Tel;
+        this.phone = phone;
         this.website = website;
-        this.Description = Description;
-        this.Price = Price;
-        this.Type = Type;
-        this.Properties = Properties;
+        this.description = description;
+        this.price = price;
+        this.type = type;
+        this.properties = properties;
         this.languages = languages;
-        this.Styles = Styles;
-        this.ChekIn = ChekIn;
-        this.CheckOut=CheckOut;
+        this.styles = styles;
+        this.check_in = check_in;
+        this.check_out = check_out;
         this.info = info;
-        this.near_res=near_res;
+        this.near_res = near_res;
         this.near_att = near_att;
-        this.Stars= Stars;
+        this.stars = stars;
         this.imgUrl = imgUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getStars() {
-        return Stars;
-    }
-    public String getTitle() {
-        return title;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTel() {
-        return Tel;
-    }
-
-    public void setTel(String tel) {
-        Tel = tel;
-    }
-
-    public String getDescription() {
-        return Description;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public void setDescription(String description) {
-        Description = description;
-    }
-
-    public String getPrice() {
-        return Price;
+        this.description = description;
     }
 
     public void setPrice(String price) {
-        Price = price;
-    }
-
-    public String getType() {
-        return Type;
+        this.price = price;
     }
 
     public void setType(String type) {
-        Type = type;
-    }
-
-    public String getProperties() {
-        return Properties;
+        this.type = type;
     }
 
     public void setProperties(String properties) {
-        Properties = properties;
-    }
-
-    public String getLanguages() {
-        return languages;
+        this.properties = properties;
     }
 
     public void setLanguages(String languages) {
         this.languages = languages;
     }
 
-    public String getStyles() {
-        return Styles;
-    }
-
     public void setStyles(String styles) {
-        Styles = styles;
+        this.styles = styles;
     }
 
-    public String getChekIn() {
-        return ChekIn;
+    public void setCheck_in(String check_in) {
+        this.check_in = check_in;
     }
 
-    public void setChekIn(String chekIn) {
-        ChekIn = chekIn;
-    }
-
-    public String getCheckOut() {
-        return CheckOut;
-    }
-
-    public void setCheckOut(String checkOut) {
-        CheckOut = checkOut;
+    public void setCheck_out(String check_out) {
+        this.check_out = check_out;
     }
 
     public void setInfo(String info) {
@@ -147,18 +89,61 @@ public class Hotel implements Serializable {
         this.near_att = near_att;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setStars(String stars) {
+        this.stars = stars;
     }
 
-
-    public void setWebsite(String website) {
-        this.website = website;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getAddress() {
+        return address;
+    }
 
+    public String getPhone() {
+        return phone;
+    }
 
+    public String getWebsite() {
+        return website;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getProperties() {
+        return properties;
+    }
+
+    public String getLanguages() {
+        return languages;
+    }
+
+    public String getStyles() {
+        return styles;
+    }
+
+    public String getCheck_in() {
+        return check_in;
+    }
+
+    public String getCheck_out() {
+        return check_out;
+    }
 
     public String getInfo() {
         return info;
@@ -168,21 +153,15 @@ public class Hotel implements Serializable {
         return near_res;
     }
 
-
     public String getNear_att() {
         return near_att;
     }
 
-
-
-    public String getAddress() {
-        return address;
+    public String getStars() {
+        return stars;
     }
 
-
-    public String getWebsite() {
-        return website;
+    public String getImgUrl() {
+        return imgUrl;
     }
-
-
 }

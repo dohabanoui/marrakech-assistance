@@ -89,8 +89,9 @@ public class HomeFragment extends Fragment {
                     startActivity(intent);
                 }
         );
+        String ipAddress = new AppReference(getContext()).getIpAddress();
 
-        if (isConnectedToInternet()){
+        if (isConnectedToInternet() && ipAddress.equals("")){
             showIpAddressDialog();
         }
 

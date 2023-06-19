@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.lst.marrakechassistance.Model.Restaurant;
 import com.lst.marrakechassistance.R;
 
@@ -40,7 +42,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
             String restaurantAddress = selectedRestaurant.getAddress();
             String restaurantPrice = selectedRestaurant.getPrice();
             String restaurantPhone = selectedRestaurant.getPhone();
-            String restaurantAbout = selectedRestaurant.getAbout();
+            String restaurantAbout = selectedRestaurant.getDescription();
             String restaurantCuisine = selectedRestaurant.getCuisine();
             String restaurantFeatures = selectedRestaurant.getFeatures();
             String restaurantMeals = selectedRestaurant.getMeals();
@@ -50,7 +52,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
             String restaurantNear_res = selectedRestaurant.getNear_res();
             String restaurantNear_hot = selectedRestaurant.getNear_hot();
             String restaurantNear_att = selectedRestaurant.getNear_att();
-
+            String imgUrl = selectedRestaurant.getImgUrl();
             // Display the restaurant's name in a TextView
             TextView nameTextView = findViewById(R.id.titleRestaurantDetail);
             TextView addressTextView = findViewById(R.id.localisationRestaurant);
@@ -67,6 +69,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
             TextView near_hotTextView = findViewById(R.id.near_hotRestaurant);
             TextView near_attTextView = findViewById(R.id.near_attRestaurant);
 
+            ImageView imageView = findViewById(R.id.imgDetailRestaurant);
 
             nameTextView.setText(restaurantName);
             addressTextView.setText(restaurantAddress);
@@ -84,6 +87,12 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
             near_hotTextView.setText(restaurantNear_hot);
             near_attTextView.setText(restaurantNear_att);
 
+            Glide.with(this)
+                    .load(imgUrl)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.hotel_ph)
+                            .error(R.drawable.hotel_ph))
+                    .into(imageView);
 
             down_arrow = findViewById(R.id.down_arrow);
             scrollView = findViewById(R.id.scrollView);
@@ -111,15 +120,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RestaurantsActivity.class);
-
-                Pair[] pairs= new Pair[1];
-                pairs[0] = new Pair<View,String>(down_arrow,"backgroun_image_transition");
-
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(RestaurantDetailsActivity.this,pairs);
-                startActivity(intent,options.toBundle());
-
-
+                onBackPressed();
             }
         });
     }

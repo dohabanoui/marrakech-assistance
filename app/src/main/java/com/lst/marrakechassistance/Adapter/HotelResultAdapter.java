@@ -12,15 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.lst.marrakechassistance.Model.HotelModelClass;
+import com.lst.marrakechassistance.Model.Hotel;
 import com.lst.marrakechassistance.R;
 
 import java.util.List;
 
 public class HotelResultAdapter extends RecyclerView.Adapter<HotelResultAdapter.HotelResultHolder>{
-    List<HotelModelClass> hotels;
+    List<Hotel> hotels;
 
-    public HotelResultAdapter(List<HotelModelClass> hotels) {
+    private HotelAdapter.OnItemClickListener onItemClickListener;
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+    public void setOnItemClickListener(HotelAdapter.OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
+    public HotelResultAdapter(List<Hotel> hotels) {
         this.hotels = hotels;
     }
 
@@ -33,12 +41,12 @@ public class HotelResultAdapter extends RecyclerView.Adapter<HotelResultAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull HotelResultAdapter.HotelResultHolder holder, int position) {
-        HotelModelClass hotel = hotels.get(position);
+        Hotel hotel = hotels.get(position);
         holder.name.setText(hotel.getName());
         holder.type.setText(hotel.getType());
 
         Glide.with(holder.itemView.getContext())
-                .load(hotel.getImg())
+                .load(hotel.getImgUrl())
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.hotel_ph)
                         .error(R.drawable.hotel_ph))
@@ -49,6 +57,14 @@ public class HotelResultAdapter extends RecyclerView.Adapter<HotelResultAdapter.
         } else {
             holder.rate.setRating(Float.parseFloat(hotel.getStars()));
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(view, position);
+                }
+            }
+        });
     }
 
     @Override

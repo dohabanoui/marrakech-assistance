@@ -1,8 +1,6 @@
 package com.lst.marrakechassistance.Adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.lst.marrakechassistance.Model.AttractionModelClass;
+import com.lst.marrakechassistance.Model.Attraction;
 import com.lst.marrakechassistance.R;
 
 import java.util.List;
@@ -23,10 +21,10 @@ import java.util.List;
 
 public class AttractionsAdapter extends RecyclerView.Adapter<AttractionsAdapter.MyViewHolder>{
 
-    List<AttractionModelClass> aData;
+    List<Attraction> aData;
     LayoutInflater inflater;
     Context aContext ;
-    public AttractionsAdapter(List<AttractionModelClass> aData, Context aContext) {
+    public AttractionsAdapter(List<Attraction> aData, Context aContext) {
         this.aData = aData;
         this.aContext=aContext;
         this.inflater = LayoutInflater.from(aContext);

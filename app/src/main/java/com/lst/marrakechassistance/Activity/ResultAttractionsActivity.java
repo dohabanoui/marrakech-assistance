@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.lst.marrakechassistance.Adapter.AttractionsAdapter;
-import com.lst.marrakechassistance.Model.AttractionModelClass;
+import com.lst.marrakechassistance.Model.Attraction;
 import com.lst.marrakechassistance.R;
 import com.lst.marrakechassistance.utils.AppReference;
 import com.lst.marrakechassistance.utils.AttractionsUtil;
@@ -88,10 +88,10 @@ public class ResultAttractionsActivity extends AppCompatActivity {
                    String responseData = response.body().string();
                    try {
                        JSONArray json = new JSONArray(responseData);
-                       ArrayList<AttractionModelClass> tempAttractions = new ArrayList<AttractionModelClass>();
+                       ArrayList<Attraction> tempAttractions = new ArrayList<Attraction>();
                        for (int i = 0; i < json.length(); i++) {
                            JSONObject jsonObject = json.getJSONObject(i);
-                           AttractionModelClass attraction = new AttractionModelClass();
+                           Attraction attraction = new Attraction();
                             attraction.setName(jsonObject.getString("Names"));
                             attraction.setAdress(jsonObject.getString("adress"));
                             attraction.setDescription(jsonObject.getString("description"));
@@ -126,16 +126,16 @@ public class ResultAttractionsActivity extends AppCompatActivity {
        }
     }
 
-    private class AttractionsDataLoader extends AsyncTask<String , Void, ArrayList<AttractionModelClass>>{
+    private class AttractionsDataLoader extends AsyncTask<String , Void, ArrayList<Attraction>>{
 
         @Override
-        protected ArrayList<AttractionModelClass> doInBackground(String... strings) {
+        protected ArrayList<Attraction> doInBackground(String... strings) {
             String query = strings[0];
-            return (ArrayList<AttractionModelClass>) new AttractionsUtil(ResultAttractionsActivity.this).getAttractions(query);
+            return (ArrayList<Attraction>) new AttractionsUtil(ResultAttractionsActivity.this).getAttractions(query);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<AttractionModelClass> result) {
+        protected void onPostExecute(ArrayList<Attraction> result) {
             mShimmerViewContainer.stopShimmer();
             mShimmerViewContainer.setVisibility(View.GONE);
 
