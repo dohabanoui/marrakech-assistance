@@ -114,11 +114,13 @@ public class ResultRestaurantsActivity extends AppCompatActivity {
                             restaurant.setImgUrl(jsonObject.getString("img_url"));
                             temRestaurants.add(restaurant);
                         }
+                        runOnUiThread(()->{
+                            mShimmerViewContainer.stopShimmer();
+                            mShimmerViewContainer.setVisibility(View.GONE);
+                            adapter = new RestaurantResultAdapter(temRestaurants, ResultRestaurantsActivity.this);
+                            recyclerView.setAdapter(adapter);
+                        });
 
-                      mShimmerViewContainer.stopShimmer();
-                      mShimmerViewContainer.setVisibility(View.GONE);
-                      adapter = new RestaurantResultAdapter(temRestaurants, ResultRestaurantsActivity.this);
-                      recyclerView.setAdapter(adapter);
                       adapter.setOnItemClickListener(new RestaurantResultAdapter.OnItemClickListener() {
                           @Override
                           public void onItemClick(View view, int position) {
