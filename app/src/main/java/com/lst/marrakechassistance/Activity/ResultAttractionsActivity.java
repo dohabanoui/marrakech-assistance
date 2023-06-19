@@ -54,76 +54,7 @@ public class ResultAttractionsActivity extends AppCompatActivity {
        mShimmerViewContainer = findViewById(R.id.shimmerLayout);
        recyclerView = findViewById(R.id.restRecyclerView);
        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-       if (isConnectedToInternet()){
-           ipAddress = new AppReference(this).getIpAddress();
-           assert ipAddress != null;
-           Toast.makeText(this, "Connected To internet", Toast.LENGTH_SHORT).show();
-
-           OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                   .connectTimeout(10, TimeUnit.SECONDS)
-                   .readTimeout(10, TimeUnit.SECONDS) // Set read timeout
-                   .writeTimeout(10, TimeUnit.SECONDS) // Set write timeout
-                   .build();
-
-           RequestBody requestBody = new MultipartBody.Builder()
-                   .setType(MultipartBody.FORM)
-                   .addFormDataPart("category", selectedCategory)
-                   .addFormDataPart("query",query)
-                   .build();
-
-           Request request = new Request.Builder()
-                   .url("http://" + ipAddress + ":5000/search")
-                   .post(requestBody)
-                   .build();
-           okHttpClient.newCall(request).enqueue(new Callback() {
-               @Override
-               public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                   e.printStackTrace();
-                   new AttractionsDataLoader().execute(query);
-               }
-
-               @Override
-               public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                   assert response.body() != null;
-                   String responseData = response.body().string();
-                   try {
-                       JSONArray json = new JSONArray(responseData);
-                       ArrayList<Attraction> tempAttractions = new ArrayList<Attraction>();
-                       for (int i = 0; i < json.length(); i++) {
-                           JSONObject jsonObject = json.getJSONObject(i);
-                           Attraction attraction = new Attraction();
-                            attraction.setName(jsonObject.getString("Names"));
-                            attraction.setAdress(jsonObject.getString("adress"));
-                            attraction.setDescription(jsonObject.getString("description"));
-                            attraction.setWebsite(jsonObject.getString("WebSite"));
-                            attraction.setSug_dur(jsonObject.getString("Suggested duration"));
-                            attraction.setOpen_dur(jsonObject.getString("open during"));
-                            attraction.setCategory(jsonObject.getString("category"));
-                            attraction.setNear_res(jsonObject.getString("near_res"));
-                            attraction.setNear_att(jsonObject.getString("near_att"));
-                            attraction.setGps(jsonObject.getString("gps"));
-                            attraction.setImg(jsonObject.getString("img_url"));
-                            tempAttractions.add(attraction);
-                       }
-                       runOnUiThread(
-                               () -> {
-                                   mShimmerViewContainer.stopShimmer();
-                                   mShimmerViewContainer.setVisibility(View.GONE);
-                                   adapter = new AttractionsAdapter(tempAttractions, ResultAttractionsActivity.this);
-                                   recyclerView.setAdapter(adapter);
-                               }
-                       );
-
-                   } catch (JSONException e){
-                       e.printStackTrace();
-                   }
-
-               }
-           });
-
-       } else {
-           new AttractionsDataLoader().execute(query);
-       }
+       new AttractionsDataLoader().execute(query);
     }
 
     private class AttractionsDataLoader extends AsyncTask<String , Void, ArrayList<Attraction>>{
@@ -142,15 +73,5 @@ public class ResultAttractionsActivity extends AppCompatActivity {
             adapter = new AttractionsAdapter(result, ResultAttractionsActivity.this);
             recyclerView.setAdapter(adapter);
         }
-    }
-
-    private boolean isConnectedToInternet() {
-        // Check The connectivity of The user
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager != null) {
-            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-        }
-        return false;
     }
 }
