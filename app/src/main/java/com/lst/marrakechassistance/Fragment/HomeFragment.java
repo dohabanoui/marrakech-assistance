@@ -89,7 +89,12 @@ public class HomeFragment extends Fragment {
                     startActivity(intent);
                 }
         );
-        showIpAddressDialog();
+        String ipAddress = new AppReference(getContext()).getIpAddress();
+        if (isConnectedToInternet() && ipAddress.equals("")){
+            // show the dialog only if the ipAddress does not exist
+            showIpAddressDialog();
+        }
+
         // Initialise The gridLayout item
         // Make a GridLayout item to reference the View GridLayout
         GridLayout gridLayout = rootView.findViewById(R.id.gridLayout);
@@ -300,5 +305,4 @@ public class HomeFragment extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
     }
-
 }

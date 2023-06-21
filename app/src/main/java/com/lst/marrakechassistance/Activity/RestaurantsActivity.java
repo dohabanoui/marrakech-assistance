@@ -13,6 +13,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.lst.marrakechassistance.Adapter.RestaurantAdapter;
 import com.lst.marrakechassistance.Model.Restaurant;
 import com.lst.marrakechassistance.R;
+import com.lst.marrakechassistance.utils.PlaceUtil;
 import com.lst.marrakechassistance.utils.RestaurantUtil;
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class RestaurantsActivity extends AppCompatActivity {
 
             // Update the RecyclerView with the retrieved hotels
             restaurants = result;
-            adapter = new RestaurantAdapter(restaurants);
+            adapter = new RestaurantAdapter(restaurants, new PlaceUtil(getApplicationContext()));
             recyclerView.setAdapter(adapter);
             adapter.setOnItemClickListener(new RestaurantAdapter.OnItemClickListener() {
 

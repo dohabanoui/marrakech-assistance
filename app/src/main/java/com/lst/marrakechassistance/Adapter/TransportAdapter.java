@@ -8,15 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lst.marrakechassistance.Model.Transportt;
+import com.lst.marrakechassistance.Model.BusLine;
 import com.lst.marrakechassistance.R;
 
 import java.util.List;
 
 public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.ViewHolder> {
-    List<Transportt> transports;
+    List<BusLine> transports;
 
-    public TransportAdapter(List<Transportt> transports) {
+    public TransportAdapter(List<BusLine> transports) {
         this.transports = transports;
     }
 

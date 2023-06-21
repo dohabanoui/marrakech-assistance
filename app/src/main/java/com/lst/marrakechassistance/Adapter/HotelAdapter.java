@@ -13,16 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.lst.marrakechassistance.Model.Hotel;
+import com.lst.marrakechassistance.Model.Place;
 import com.lst.marrakechassistance.R;
+import com.lst.marrakechassistance.utils.PlaceUtil;
 
 import java.util.List;
 
 public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> {
     List<Hotel> hotels;
+    PlaceUtil util;
     private OnItemClickListener onItemClickListener;
 
-    public HotelAdapter(List<Hotel> hotels) {
+    public HotelAdapter(List<Hotel> hotels, PlaceUtil util) {
         this.hotels = hotels;
+        this.util = util;
     }
 
     @NonNull
@@ -44,6 +48,9 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         holder.hotelAddress.setText(hotels.get(position).getAddress());
         holder.hotelPrice.setText(hotels.get(position).getPrice());
 
+        if (hotels.get(position).getFavorite()){
+            holder.favIcon.setImageResource(R.drawable.round_filled_favorite_24);
+        }
         // Load the image
         Glide.with(holder.itemView.getContext())
                         .load(hotels.get(position).getImgUrl())
@@ -60,12 +67,9 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
             holder.hotelRatingBar.setRating(Float.parseFloat(hotels.get(position).getStars()));
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(view, position);
-                }
+        holder.itemView.setOnClickListener(view -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(view, position);
             }
         });
     }
@@ -81,6 +85,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         TextView hotelPrice;
         ImageView hotelImg;
         RatingBar hotelRatingBar;
+        ImageView favIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -89,6 +94,20 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
             hotelPrice = itemView.findViewById(R.id.priceHotel);
             hotelImg = itemView.findViewById(R.id.picHotel);
             hotelRatingBar = itemView.findViewById(R.id.ratingBarHotel);
+            favIcon = itemView.findViewById(R.id.favoriteIcon);
+            favIcon.setOnClickListener(view -> {
+                int position = getBindingAdapterPosition();
+                if (position != RecyclerView.NO_POSITION){
+                    Place place = hotels.get(position);
+                    if (place.getFavorite()){
+                        util.removeFavorite(place);
+                    } else {
+                        util.setFavorite(place);
+                    }
+                    place.setFavorite(!place.getFavorite());
+                    notifyItemChanged(position);
+                }
+            });
         }
     }
 }

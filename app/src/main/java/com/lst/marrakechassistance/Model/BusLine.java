@@ -2,7 +2,7 @@ package com.lst.marrakechassistance.Model;
 
 import java.io.Serializable;
 
-public class Transportt implements Serializable {
+public class BusLine implements Serializable {
     private String ID;
     private String ligne_id;
     private String station;
@@ -40,18 +40,11 @@ public class Transportt implements Serializable {
         this.ligne_num = ligne_num;
     }
 
-    public Transportt(String ID, String ligne_id, String station, String ligne_num) {
+    public BusLine(String ID, String ligne_id, String station, String ligne_num) {
         this.ID = ID;
         this.ligne_id = ligne_id;
         this.station = station;
         this.ligne_num = ligne_num;
 
     }
-
-
-
-
-
-
-
 }

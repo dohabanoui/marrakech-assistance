@@ -5,29 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.lst.marrakechassistance.Adapter.HotelAdapter;
 import com.lst.marrakechassistance.Adapter.TransportAdapter;
-import com.lst.marrakechassistance.Model.Hotel;
-import com.lst.marrakechassistance.Model.Transportt;
+import com.lst.marrakechassistance.Model.BusLine;
 import com.lst.marrakechassistance.R;
-import com.lst.marrakechassistance.utils.HotelUtil;
 import com.lst.marrakechassistance.utils.TransportUtil;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
 
 public class TransportActivity extends AppCompatActivity {
 
     private ShimmerFrameLayout mShimmerViewContainer;
     RecyclerView recyclerView;
     TransportAdapter adapter;
-    ArrayList<Transportt> transportts;
+    ArrayList<BusLine> transportts;
 
 
     @Override
@@ -56,14 +51,14 @@ public class TransportActivity extends AppCompatActivity {
         mShimmerViewContainer.stopShimmer();
         super.onPause();
     }
-    private class TransportDataLoadingTask extends AsyncTask<Void, Void, ArrayList<Transportt>> {
+    private class TransportDataLoadingTask extends AsyncTask<Void, Void, ArrayList<BusLine>> {
         @Override
-        protected ArrayList<Transportt> doInBackground(Void... params) {
-            return (ArrayList<Transportt>) new TransportUtil(TransportActivity.this).getAllTransport();
+        protected ArrayList<BusLine> doInBackground(Void... params) {
+            return (ArrayList<BusLine>) new TransportUtil(TransportActivity.this).getAllTransport();
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Transportt> result) {
+        protected void onPostExecute(ArrayList<BusLine> result) {
             // Hide the shimmer animation
             mShimmerViewContainer.stopShimmer();
             mShimmerViewContainer.setVisibility(View.GONE);

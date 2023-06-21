@@ -2,17 +2,15 @@ package com.lst.marrakechassistance.Model;
 
 import java.io.Serializable;
 
-public class Restaurant implements Serializable {
+public class Restaurant extends Place implements Serializable {
 
-    private String name, address, description, phone, website,cuisine, features, meals, guru_time, special_diets, price,info, near_res, near_hot, near_att, imgUrl;
+    private String phone, website,cuisine, features, meals, guru_time, special_diets, price,info, near_res, near_hot, near_att, imgUrl;
 
     public Restaurant() {
     }
 
     public Restaurant(String name, String address, String description, String phone, String website, String cuisine, String features, String meals, String guru_time, String special_diets, String price, String info, String near_res, String near_hot, String near_att, String imgUrl) {
-        this.name = name;
-        this.address = address;
-        this.description = description;
+        super(name, address, imgUrl, description, "restaurant");
         this.phone = phone;
         this.website = website;
         this.cuisine = cuisine;
@@ -27,25 +25,8 @@ public class Restaurant implements Serializable {
         this.near_att = near_att;
         this.imgUrl = imgUrl;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public String getPhone() {
         return phone;
-    }
-
-    public String getWebsite() {
-        return website;
     }
 
     public String getCuisine() {
@@ -92,17 +73,6 @@ public class Restaurant implements Serializable {
         return imgUrl;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public void setPhone(String phone) {
         this.phone = phone;
@@ -124,24 +94,12 @@ public class Restaurant implements Serializable {
         this.meals = meals;
     }
 
-    public void setGuru_time(String guru_time) {
-        this.guru_time = guru_time;
-    }
-
     public void setSpecial_diets(String special_diets) {
         this.special_diets = special_diets;
     }
 
     public void setPrice(String price) {
         this.price = price;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public void setNear_res(String near_res) {
-        this.near_res = near_res;
     }
 
     public void setNear_hot(String near_hot) {

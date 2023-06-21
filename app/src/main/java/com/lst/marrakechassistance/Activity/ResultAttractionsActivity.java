@@ -54,6 +54,7 @@ public class ResultAttractionsActivity extends AppCompatActivity {
        mShimmerViewContainer = findViewById(R.id.shimmerLayout);
        recyclerView = findViewById(R.id.restRecyclerView);
        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
        new AttractionsDataLoader().execute(query);
     }
 

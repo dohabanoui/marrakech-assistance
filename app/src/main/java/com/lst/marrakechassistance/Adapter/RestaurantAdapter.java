@@ -12,17 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.lst.marrakechassistance.Model.Place;
 import com.lst.marrakechassistance.Model.Restaurant;
 import com.lst.marrakechassistance.R;
+import com.lst.marrakechassistance.utils.PlaceUtil;
 
 import java.util.List;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
     List<Restaurant> restaurants;
     private OnItemClickListener onItemClickListener;
+    PlaceUtil util;
 
-    public RestaurantAdapter(List<Restaurant> restaurants) {
+    public RestaurantAdapter(List<Restaurant> restaurants, PlaceUtil util) {
         this.restaurants = restaurants;
+        this.util = util;
     }
 
     @NonNull
@@ -73,12 +77,27 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         TextView restaurantPrice;
         ImageView restImg;
 
+        ImageView favIcon;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             restaurantName = itemView.findViewById(R.id.titleRestaurant);
             restaurantAddress = itemView.findViewById(R.id.addressRestaurant);
             restaurantPrice = itemView.findViewById(R.id.priceRestaurant);
             restImg = itemView.findViewById(R.id.picRestaurant);
+            favIcon = itemView.findViewById(R.id.favoriteIcon);
+            favIcon.setOnClickListener(view -> {
+                int position = getBindingAdapterPosition();
+                if (position != RecyclerView.NO_POSITION){
+                    Place place = restaurants.get(position);
+                    if (place.getFavorite()){
+                        util.removeFavorite(place);
+                    } else {
+                        util.setFavorite(place);
+                    }
+                    place.setFavorite(!place.getFavorite());
+                    notifyItemChanged(position);
+                }
+            });
         }
     }
 }

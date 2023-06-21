@@ -10,9 +10,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,7 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,13 +46,6 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
-import com.mapbox.api.directions.v5.models.DirectionsResponse;
-import com.mapbox.api.directions.v5.models.DirectionsRoute;
-import com.mapbox.geojson.Point;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 
 import java.util.List;
 
@@ -104,7 +94,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Permiss
                 startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
             }
         });
-
         return rootView;
     }
 
@@ -160,17 +149,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Permiss
        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
            @Override
            public void onStyleLoaded(@NonNull Style style) {
-               // Move the camera to the desired starting point
-               LatLng startingLatLng = new LatLng(31.6295, -7.9811);
+
+               // Set the target to the coordinates of Marrakech city
+               LatLng marrakechCoordinates = new LatLng(31.6295, -7.9811);
                CameraPosition cameraPosition = new CameraPosition.Builder()
-                       .target(startingLatLng)
+                       .target(marrakechCoordinates)
                        .zoom(12)
                        .build();
                mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 4000, null);
 
                // Enable location component
                enableLocationComponent(style);
-
                // Create and configure a SymbolLayer for position names
                SymbolLayer symbolLayer = new SymbolLayer("symbol-layer-id", "source-id");
                symbolLayer.setProperties(
@@ -190,8 +179,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Permiss
            }
        });
    }
-
-
     private void updateDestination(double latitude, double longitude) {
         destinationLatitude = latitude;
         destinationLongitude = longitude;

@@ -6,7 +6,6 @@ import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.lst.marrakechassistance.Model.Restaurant;
-import com.lst.marrakechassistance.Model.RestoModelClass;
 
 import java.util.ArrayList;
 import java.util.List;

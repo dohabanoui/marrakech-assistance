@@ -15,6 +15,7 @@ import com.lst.marrakechassistance.Adapter.HotelAdapter;
 import com.lst.marrakechassistance.Model.Hotel;
 import com.lst.marrakechassistance.R;
 import com.lst.marrakechassistance.utils.HotelUtil;
+import com.lst.marrakechassistance.utils.PlaceUtil;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -57,7 +58,7 @@ public class HotelsActivity extends AppCompatActivity {
 
             // Update the RecyclerView with the retrieved hotels
             hotels = result;
-            adapter = new HotelAdapter(hotels);
+            adapter = new HotelAdapter(hotels, new PlaceUtil(getApplicationContext()));
             recyclerView.setAdapter(adapter);
             adapter.setOnItemClickListener(new HotelAdapter.OnItemClickListener() {
 

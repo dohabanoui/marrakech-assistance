@@ -2,7 +2,8 @@ from os.path import join, dirname
 import numpy as np
 import pandas as pd
 from rank_bm25 import BM25Okapi
-
+import csv
+import os
 
 def getHotels():
     filename = join(dirname(__file__), 'HotelsFinalV2.csv')
@@ -111,3 +112,55 @@ def attractions(query):
             df["Suggested duration"][i],df["open during"][i],df["near_res"][i],\
             df["near_att"][i],df["img_url"][i],df["gps"][i]])
         return tuple(res3)
+
+
+def add_to_favorites(title, address, description, pl_type, imgUrl):
+    file_path = join(dirname(__file__),'favorites.csv')  # Path to the CSV file
+
+    # Create a dictionary with the data for the new entry
+    new_entry = {
+        'title': [title],
+        'address': [address],
+        'description': [description],
+        'type': [pl_type],
+        'imgUrl': [imgUrl]
+    }
+
+    # Create a DataFrame from the new entry
+    df = pd.DataFrame(new_entry)
+
+    # Check if the CSV file exists
+    try:
+        existing_data = pd.read_csv(file_path)
+        df = pd.concat([existing_data, df], ignore_index=True)
+    except FileNotFoundError:
+        # File doesn't exist, create a new file with the new entry
+        pass
+
+    # Write the DataFrame to the CSV file
+    df.to_csv(file_path, index=False)
+
+
+def get_all_favorites():
+    file_path = join(dirname(__file__),'favorites.csv')  # Path to the CSV file
+
+    # Read the CSV file into a pandas DataFrame
+    df = pd.read_csv(file_path)
+
+    # Return the DataFrame as a list of dictionaries
+    favorites = df.to_dict(orient='records')
+
+    return favorites
+
+
+def remove_from_favorites(title):
+    file_path = join(dirname(__file__),'favorites.csv')  # Path to the CSV file
+
+    # Read the CSV file into a pandas DataFrame
+    df = pd.read_csv(file_path)
+
+    # Filter the DataFrame to exclude the rows with the specified title
+    df = df[df['title'] != title]
+
+    # Write the updated DataFrame back to the CSV file
+    df.to_csv(file_path, index=False)

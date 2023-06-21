@@ -5,7 +5,7 @@ import android.content.Context;
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
-import com.lst.marrakechassistance.Model.Transportt;
+import com.lst.marrakechassistance.Model.BusLine;
 
 
 import java.util.ArrayList;
@@ -19,8 +19,8 @@ public class TransportUtil {
         this.context = context;
     }
 
-    public List<Transportt> getAllTransport(){
-        ArrayList<Transportt> transports = new ArrayList<>();
+    public List<BusLine> getAllTransport(){
+        ArrayList<BusLine> transports = new ArrayList<>();
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(context));
         }
@@ -35,7 +35,7 @@ public class TransportUtil {
             String ligne_num = data.get(PyObject.fromJava("ligne_num")).toString();
 
 
-            transports.add(new Transportt(station_id, ligne_id, station_place, ligne_num));
+            transports.add(new BusLine(station_id, ligne_id, station_place, ligne_num));
         }
         return transports;
     }

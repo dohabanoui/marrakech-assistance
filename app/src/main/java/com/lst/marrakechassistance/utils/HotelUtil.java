@@ -43,7 +43,7 @@ public class HotelUtil {
             String near_att = data.get(PyObject.fromJava("near_att")).toString();
             String stars = data.get(PyObject.fromJava("Stars")).toString();
             String imgUrl = data.get(PyObject.fromJava("img_url")).toString();
-            hotels.add(new Hotel(name,address,phone,website,description,price,type, properties, languages,styles, check_in, check_out, info, near_res,near_att, stars, imgUrl));
+            hotels.add(new Hotel(name,address,phone,website,description,price,type, properties, languages,styles, check_in, info, near_res,near_att, stars, imgUrl));
         }
         return hotels;
     }
