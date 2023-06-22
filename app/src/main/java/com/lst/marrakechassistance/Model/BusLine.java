@@ -3,48 +3,44 @@ package com.lst.marrakechassistance.Model;
 import java.io.Serializable;
 
 public class BusLine implements Serializable {
-    private String ID;
-    private String ligne_id;
-    private String station;
-    private String ligne_num;
+    String id, lineNum, depart, terminus;
 
-    public String getID() {
-        return ID;
+    public BusLine(String id, String lineNum, String depart, String terminus) {
+        this.id = id;
+        this.lineNum = lineNum;
+        this.depart = depart;
+        this.terminus = terminus;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setLineNum(String lineNum) {
+        this.lineNum = lineNum;
     }
 
-    public String getLigne_id() {
-        return ligne_id;
+    public void setDepart(String depart) {
+        this.depart = depart;
     }
 
-    public void setLigne_id(String ligne_id) {
-        this.ligne_id = ligne_id;
+    public void setTerminus(String terminus) {
+        this.terminus = terminus;
     }
 
-    public String getStation() {
-        return station;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setStation(String station) {
-        this.station = station;
+    public String getId() {
+        return id;
     }
 
-    public String getLigne_num() {
-        return ligne_num;
+    public String getLineNum() {
+        return lineNum;
     }
 
-    public void setLigne_num(String ligne_num) {
-        this.ligne_num = ligne_num;
+    public String getDepart() {
+        return depart;
     }
 
-    public BusLine(String ID, String ligne_id, String station, String ligne_num) {
-        this.ID = ID;
-        this.ligne_id = ligne_id;
-        this.station = station;
-        this.ligne_num = ligne_num;
-
+    public String getTerminus() {
+        return terminus;
     }
 }

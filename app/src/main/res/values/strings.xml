@@ -49,5 +49,6 @@
 
     <string name="mapbox_access_token">sk.eyJ1Ijoib3Vzc2FtYWVsaGQiLCJhIjoiY2xpaml3MTFhMDh0MjNxcGg0bm45eGp5ciJ9._n8UPscuh7Y89NzoJzZARA</string>
     <string name="not_logged_in_message">not logged in</string>
+    <string name="back_button">back Button</string>
 
 </resources>

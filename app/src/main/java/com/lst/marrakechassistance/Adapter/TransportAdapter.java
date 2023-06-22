@@ -14,10 +14,19 @@ import com.lst.marrakechassistance.R;
 import java.util.List;
 
 public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.ViewHolder> {
-    List<BusLine> transports;
+    List<BusLine> lines;
 
-    public TransportAdapter(List<BusLine> transports) {
-        this.transports = transports;
+    OnItemClickListener onItemClickListener;
+    public TransportAdapter(List<BusLine> lines) {
+        this.lines = lines;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -29,33 +38,31 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.TransportID.setText(transports.get(position).getID());
-        holder.Transportligne_id.setText(transports.get(position).getLigne_id());
-        holder.TransportStation.setText(transports.get(position).getStation());
-        holder.Transportligne_num.setText(transports.get(position).getLigne_num());
+            BusLine line = lines.get(position);
+            holder.lineNumber.setText(line.getLineNum());
+            holder.lineStart.setText(line.getDepart());
+            holder.lineEnd.setText(line.getTerminus());
 
-
+        holder.itemView.setOnClickListener(view -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(view, position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return transports.size();
+        return lines.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        TextView TransportID;
-        TextView Transportligne_id;
-        TextView TransportStation;
-        TextView Transportligne_num;
 
-
+        TextView lineNumber, lineStart, lineEnd;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            TransportID = itemView.findViewById(R.id.IdTransport);
-            Transportligne_id = itemView.findViewById(R.id.ligneidTransport);
-            TransportStation = itemView.findViewById(R.id.stationTransport);
-            Transportligne_num = itemView.findViewById(R.id.lignenumTransport);
-
+            lineNumber = itemView.findViewById(R.id.lineNumber);
+            lineStart = itemView.findViewById(R.id.busStart);
+            lineEnd = itemView.findViewById(R.id.BusTerminus);
         }
     }
 }

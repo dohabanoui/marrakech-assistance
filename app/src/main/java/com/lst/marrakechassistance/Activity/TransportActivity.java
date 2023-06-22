@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,7 @@ public class TransportActivity extends AppCompatActivity {
     private ShimmerFrameLayout mShimmerViewContainer;
     RecyclerView recyclerView;
     TransportAdapter adapter;
-    ArrayList<BusLine> transportts;
+    ArrayList<BusLine> lines;
 
 
     @Override
@@ -63,8 +64,15 @@ public class TransportActivity extends AppCompatActivity {
             mShimmerViewContainer.stopShimmer();
             mShimmerViewContainer.setVisibility(View.GONE);
 
-            transportts = result;
-            adapter = new TransportAdapter(transportts);
+            lines = result;
+            adapter = new TransportAdapter(lines);
+            adapter.setOnItemClickListener(new TransportAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(TransportActivity.this, LineDetailsActivity.class);
+                    intent.putExtra("selectedLine", lines.get(position));
+                    startActivity(intent);
+                }
+            });
             recyclerView.setAdapter(adapter);
-
 }}}

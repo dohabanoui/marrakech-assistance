@@ -55,6 +55,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                                 .placeholder(R.drawable.hotel_ph))
                                 .error(R.drawable.hotel_ph)
                         .into(holder.restImg);
+        if(restaurants.get(position).getFavorite()){
+            holder.favIcon.setImageResource(R.drawable.round_filled_favorite_24);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

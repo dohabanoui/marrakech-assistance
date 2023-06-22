@@ -30,10 +30,17 @@ def getAttractions():
 
 
 def getTransport():
-    filename = join(dirname(__file__), 'line_stat.csv')
-    data = pd.read_csv(filename)
-    data.fillna(' ')
+    filename = join(dirname(__file__), 'lines.csv')
+    data = pd.read_csv(filename).fillna(' ')
     return list(data.to_dict(orient='records'))
+
+def get_stations_by_line(line_id):
+    filename = join(dirname(__file__), 'line_stat.csv')
+    # filename = 'line_stat.csv'
+    line_id = int(line_id)
+    df = pd.read_csv(filename)
+    filtered_rows = df[df['ligne_id'] == line_id]
+    return filtered_rows.to_dict(orient='records')
 
 def hotels(query):
         # Initialize an empty list to store the results data
