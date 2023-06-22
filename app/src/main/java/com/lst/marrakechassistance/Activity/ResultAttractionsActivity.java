@@ -20,6 +20,7 @@ import com.lst.marrakechassistance.Model.Attraction;
 import com.lst.marrakechassistance.R;
 import com.lst.marrakechassistance.utils.AppReference;
 import com.lst.marrakechassistance.utils.AttractionsUtil;
+import com.lst.marrakechassistance.utils.PlaceUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,8 +72,16 @@ public class ResultAttractionsActivity extends AppCompatActivity {
             mShimmerViewContainer.stopShimmer();
             mShimmerViewContainer.setVisibility(View.GONE);
 
-            adapter = new AttractionsAdapter(result, ResultAttractionsActivity.this);
+            adapter = new AttractionsAdapter(result, ResultAttractionsActivity.this, new PlaceUtil(ResultAttractionsActivity.this));
             recyclerView.setAdapter(adapter);
+            adapter.setOnItemClickListener(new AttractionsAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(ResultAttractionsActivity.this,AttractionDetailsActivity.class);
+                    intent.putExtra("selectedAttr",result.get(position));
+                    startActivity(intent);
+                }
+            });
         }
     }
 }

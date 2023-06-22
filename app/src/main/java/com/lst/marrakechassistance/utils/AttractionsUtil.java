@@ -31,8 +31,8 @@ public class AttractionsUtil {
 
             data.setName(rr[0]);
             data.setCategory(rr[1]);
-            data.setAdress(rr[2]);
-            data.setImg(rr[9]);
+            data.setAddress(rr[2]);
+            data.setImgUrl(rr[9]);
             data.setDescription(rr[3]);
             data.setOpen_dur(rr[6]);
             data.setSug_dur(rr[5]);

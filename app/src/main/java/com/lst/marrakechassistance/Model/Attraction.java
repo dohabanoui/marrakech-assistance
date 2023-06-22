@@ -1,41 +1,31 @@
 package com.lst.marrakechassistance.Model;
 
-public class Attraction {
-    String name;
+import java.io.Serializable;
+
+public class Attraction extends Place implements Serializable {
+
     String category ;
-    String adress ;
-    String description ;
     String website;
     String sug_dur;
     String open_dur;
     String near_res ;
     String near_att;
-    String img ;
+
     String gps;
 
-    public Attraction(String name, String category, String adress, String description, String website, String sug_dur, String open_dur, String near_res, String near_att, String img) {
-        this.name = name;
+    public Attraction(String name, String category, String address, String description, String website, String sug_dur, String open_dur, String near_res, String near_att, String img) {
+        super(name, address, img,description, "attraction");
         this.category = category;
-        this.adress = adress;
-        this.description = description;
         this.website = website;
         this.sug_dur = sug_dur;
         this.open_dur = open_dur;
         this.near_res = near_res;
         this.near_att = near_att;
-        this.img = img;
     }
 
     public Attraction() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getCategory() {
         return category;
@@ -45,21 +35,7 @@ public class Attraction {
         this.category = category;
     }
 
-    public String getAdress() {
-        return adress;
-    }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getWebsite() {
         return website;
@@ -99,14 +75,6 @@ public class Attraction {
 
     public void setNear_att(String near_att) {
         this.near_att = near_att;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public String getGps() {

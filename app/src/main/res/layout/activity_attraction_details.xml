@@ -4,6 +4,207 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AttractionDetailsActivity">
+    tools:context=".Activity.HotelDetailActivity">
+
+    <ImageView
+        android:id="@+id/imgDetailAttr"
+        android:layout_width="470dp"
+        android:layout_height="310dp"
+        android:transitionName="background_image_transition"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/hotel"
+         />
+
+    <ImageView
+        android:id="@+id/down_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgDetailAttr"
+        app:layout_constraintTop_toTopOf="@+id/imgDetailAttr"
+        app:srcCompat="@drawable/arrow_down"/>
+    <View
+        android:id="@+id/viewHotel"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#70000000"
+        app:layout_constraintBottom_toBottomOf="@+id/imgDetailAttr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/titleAttr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Koutoubia mosque"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgDetailAttr"
+       app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewHotel"
+        app:layout_constraintVertical_bias="0.433" />
+
+    <FrameLayout
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgDetailAttr"
+        app:layout_constraintEnd_toEndOf="@+id/viewHotel"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/favoriteBackground"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="Favorite Background"
+            android:src="@drawable/favoris_bg" />
+
+        <ImageView
+            android:id="@+id/favoriteIcon"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_gravity="center"
+            android:contentDescription="Favorite Icon"
+            android:src="@drawable/favoris_noir" />
+
+    </FrameLayout>
+
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgDetailAttr"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/round_location_on_24" />
+
+                <TextView
+                    android:id="@+id/localisationAttr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Location"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/attrType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Trendy-Charming"
+                android:textSize="13dp"
+                tools:ignore="TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="About"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/descriptionAttr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="description"
+                android:textSize="15sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Opening Hours"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/openingHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Near Restaurants"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/near_resHotel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Near Restaurants"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Near Attractions"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/near_attHotel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Near Attractions"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

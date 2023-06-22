@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.lst.marrakechassistance.Adapter.AttractionsAdapter;
 import com.lst.marrakechassistance.Model.Attraction;
 import com.lst.marrakechassistance.R;
 import com.lst.marrakechassistance.utils.AttractionsUtil;
+import com.lst.marrakechassistance.utils.PlaceUtil;
 
 import java.util.ArrayList;
 
@@ -60,8 +62,16 @@ public class AttractionActivity extends AppCompatActivity {
             mShimmerViewContainer.stopShimmer();
             mShimmerViewContainer.setVisibility(View.GONE);
             Toast.makeText(AttractionActivity.this, "data fetched", Toast.LENGTH_SHORT).show();
-            adapter = new AttractionsAdapter(attractions,AttractionActivity.this);
+            adapter = new AttractionsAdapter(attractions,AttractionActivity.this, new PlaceUtil(getApplicationContext()));
             recyclerView.setAdapter(adapter);
+            adapter.setOnItemClickListener(new AttractionsAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(AttractionActivity.this,AttractionDetailsActivity.class);
+                    intent.putExtra("selectedAttr",attractions.get(position));
+                    startActivity(intent);
+                }
+            });
         }
     }
 }
