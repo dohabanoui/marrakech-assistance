@@ -5,294 +5,298 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:contentDescription="@string/app_name"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    tools:context=".Fragment.HomeFragment">
-
-    <!-- Create A colorful Background  -->
-    <LinearLayout
-        android:translationZ="@dimen/cardview_default_elevation"
-        android:id="@+id/shapeLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="@+id/kech_bg"
+        app:layout_constraintTop_toBottomOf="@+id/kech_bg"
+        tools:context=".Fragment.HomeFragment">
 
-        <View
-            android:id="@+id/topView"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/colorPrimary" />
-
-        <View
-            android:id="@+id/view5"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/wave"
-            />
-    </LinearLayout>
-
-    <!-- Add The search Input And The Text-->
-    <TextView
-        android:translationZ="@dimen/cardview_default_elevation"
-        android:id="@+id/textView"
-        android:layout_width="287dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="299dp"
-        android:text="@string/marrakech_speak"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:translationZ="@dimen/cardview_default_elevation"
-        android:id="@+id/topText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/title_str"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/shapeLayout"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="VisualLintBounds" />
-
-    <EditText
-        android:id="@+id/recherche"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="24dp"
-        android:background="@drawable/search_bg"
-        android:drawableStart="@drawable/round_search_24"
-        android:drawablePadding="8dp"
-        android:elevation="8dp"
-        android:ems="10"
-        android:fontFamily="@font/poppins_regular"
-        android:hint="@string/searching_for"
-        android:inputType="textPersonName"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topText"
-        tools:ignore="MissingConstraints,TextContrastCheck,VisualLintTextFieldSize"
-        android:importantForAutofill="no" />
-
-    <RelativeLayout
-        android:id="@+id/kech_bg"
-        android:layout_width="346dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_marrakech"
-        android:elevation="@dimen/cardview_default_elevation"
-        android:orientation="vertical"
-        android:paddingHorizontal="24dp"
-        android:paddingTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shapeLayout"
-        tools:ignore="TextSizeCheck">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/poppins_bold"
-            android:gravity="center"
-            android:text="@string/discover_the_charm_of_marrakech"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="38sp"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
-
-    <!-- Navigation Grid Layout -->
-
-    <GridLayout
-                android:id="@+id/gridLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alignmentMode="alignBounds"
-                android:columnCount="2"
-                android:rowCount="4"
-                android:layout_marginTop="16dp"
-                app:flow_horizontalGap="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/kech_bg">
-
-                <LinearLayout
-                    android:id="@+id/FragHotel"
-                    android:layout_width="165dp"
-                    android:layout_height="72dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/hotel_bg"
-                    android:elevation="2dp"
-                    android:gravity="center"
-                    tools:ignore="MissingConstraints,TextSizeCheck"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="180dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/poppins_bold"
-                        android:gravity="center"
-                        android:text="@string/hebergements"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/FragRest"
-                    android:layout_width="165dp"
-                    android:layout_height="72dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/restaurant_bg"
-                    android:elevation="2dp"
-                    android:gravity="center"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="180dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/poppins_bold"
-                        android:gravity="center"
-                        android:text="@string/restaurants"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/FragTransport"
-                    android:layout_width="165dp"
-                    android:layout_height="72dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/transport_bg"
-                    android:elevation="2dp"
-                    android:gravity="center"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="180dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/poppins_bold"
-                        android:gravity="center"
-                        android:text="@string/transport"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/FragMV"
-                    android:layout_width="165dp"
-                    android:layout_height="72dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/activity_bg"
-                    android:elevation="2dp"
-                    android:gravity="center"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="180dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/poppins_bold"
-                        android:gravity="center"
-                        android:text="@string/activity"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </GridLayout>
-
-    <!-- Whether Section For displaying the wheather Options-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="32dp"
-        android:elevation="4dp"
-        android:id="@+id/wheatherCard"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
-        android:background="@drawable/round_img">
-
+        <!-- Create A colorful Background  -->
         <LinearLayout
+            android:id="@+id/shapeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:translationZ="@dimen/cardview_default_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/weatherTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Today's Weather"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+            <View
+                android:id="@+id/topView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/colorPrimary" />
 
-            <ImageView
-                android:id="@+id/weatherIconImageView"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:src="@drawable/icon_default"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/weatherDescriptionTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Partly Cloudy"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="16sp"
-                android:textColor="#666666"
-                android:layout_gravity="center_horizontal" />
-
-            <TextView
-                android:id="@+id/weatherTemperatureTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="25°C"
-                android:textSize="24sp"
-                android:fontFamily="@font/poppins_regular"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp" />
-
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/wave" />
         </LinearLayout>
 
-    </RelativeLayout>
+        <!-- Add The search Input And The Text-->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="287dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="299dp"
+            android:text="@string/marrakech_speak"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:translationZ="@dimen/cardview_default_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-          <!--  <LinearLayout
+        <TextView
+            android:id="@+id/topText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="48dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/title_str"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:translationZ="@dimen/cardview_default_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/shapeLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VisualLintBounds" />
+
+        <EditText
+            android:id="@+id/recherche"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/search_bg"
+            android:drawableStart="@drawable/round_search_24"
+            android:drawablePadding="8dp"
+            android:elevation="8dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/searching_for"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topText"
+            tools:ignore="MissingConstraints,TextContrastCheck,VisualLintTextFieldSize" />
+
+        <RelativeLayout
+            android:id="@+id/kech_bg"
+            android:layout_width="346dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_marrakech"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shapeLayout"
+            tools:ignore="TextSizeCheck">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="@string/discover_the_charm_of_marrakech"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <!-- Navigation Grid Layout -->
+
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:alignmentMode="alignBounds"
+            android:columnCount="2"
+            android:rowCount="4"
+            app:flow_horizontalGap="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kech_bg">
+
+            <LinearLayout
+                android:id="@+id/FragHotel"
+                android:layout_width="165dp"
+                android:layout_height="72dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/hotel_bg"
+                android:elevation="2dp"
+                android:gravity="center"
+                tools:ignore="MissingConstraints,TextSizeCheck"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="180dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="@string/hebergements"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/FragRest"
+                android:layout_width="165dp"
+                android:layout_height="72dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/restaurant_bg"
+                android:elevation="2dp"
+                android:gravity="center"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="180dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="@string/restaurants"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/FragTransport"
+                android:layout_width="165dp"
+                android:layout_height="72dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/transport_bg"
+                android:elevation="2dp"
+                android:gravity="center"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="180dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="@string/transport"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/FragMV"
+                android:layout_width="165dp"
+                android:layout_height="72dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/activity_bg"
+                android:elevation="2dp"
+                android:gravity="center"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="180dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="@string/activity"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </GridLayout>
+
+        <!-- Whether Section For displaying the wheather Options-->
+        <RelativeLayout
+            android:id="@+id/wheatherCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/round_img"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gridLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/weatherTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Today's Weather"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/weatherIconImageView"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/icon_default" />
+
+                <TextView
+                    android:id="@+id/weatherDescriptionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Partly Cloudy"
+                    android:textColor="#666666"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/weatherTemperatureTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="25°C"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!--  <LinearLayout
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -388,5 +392,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
         tools:ignore="MissingConstraints,TextSizeCheck" />-->
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

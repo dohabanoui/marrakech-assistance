@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (id == R.id.home){
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, home).commit();
             return true;
-
         } else if (id == R.id.fav) {
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fav).commit();
             return true;

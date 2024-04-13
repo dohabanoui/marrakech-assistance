@@ -136,6 +136,7 @@ public class SearchRestaurantsFragment extends Fragment {
 
             }
         });
+
         String[] commonQueries = getResources().getStringArray(R.array.restaurants_common_queries);
         List<String> queryList = new ArrayList<>();
         Collections.addAll(queryList, commonQueries);
@@ -188,33 +189,33 @@ public class SearchRestaurantsFragment extends Fragment {
             }
         }
 
-            // implement the vocal search feature
-            floatingActionButton = view.findViewById(R.id.restfloatingActionButton);
-            floatingActionButton.setOnTouchListener((view1, motionEvent) -> {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    floatingActionButton.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.colorAccent));
-                    search.setText("");
-                    search.setHint("Listening ...");
-                    if (isConnectedToInternet() && !ipAddress.equals("")){
-                        //  strart The recording
-                        startRecording();
-                        Toast.makeText(getContext(), "Recording audio and sending to API", Toast.LENGTH_SHORT).show();
-                    }else{
-                        mSpeechRecognizer.startListening(mSpeechRecognizerIntent_EN);
-                    }
-                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    floatingActionButton.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.colorPrimary));
-                    if (isConnectedToInternet()){
-                        // Stop the recording
-                        stopRecording();
-                        Toast.makeText(getContext(), "Stopping recording", Toast.LENGTH_SHORT).show();
-                    } else {
-                        mSpeechRecognizer.stopListening();
-                    }
-
+        // implement the vocal search feature
+        floatingActionButton = view.findViewById(R.id.restfloatingActionButton);
+        floatingActionButton.setOnTouchListener((view1, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                floatingActionButton.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.colorAccent));
+                search.setText("");
+                search.setHint("Listening ...");
+                if (isConnectedToInternet() && !ipAddress.equals("")){
+                    //  strart The recording
+                    startRecording();
+                    Toast.makeText(getContext(), "Recording audio and sending to API", Toast.LENGTH_SHORT).show();
+                }else{
+                    mSpeechRecognizer.startListening(mSpeechRecognizerIntent_EN);
                 }
-                return false;
-            });
+            } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                floatingActionButton.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.colorPrimary));
+                if (isConnectedToInternet()){
+                    // Stop the recording
+                    stopRecording();
+                    Toast.makeText(getContext(), "Stopping recording", Toast.LENGTH_SHORT).show();
+                } else {
+                    mSpeechRecognizer.stopListening();
+                }
+
+            }
+            return false;
+        });
 
         return view;
     }
