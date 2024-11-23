@@ -28,10 +28,6 @@ git clone git@github.com:same-ou/marrakech-assistance.git
     * Ensure that Chaquopy is configured correctly in your Android Studio project settings.
 5. Run the App: Connect your Android device or use an emulator, then build and run the Marrakech Assistance app from Android Studio.
 6. Explore Categories: Once the app is running on your device, you can start exploring categories like restaurants, accommodations, and transport within the app.
-## Connect With Me
-Have feedback, suggestions, or questions about the Marrakech Assistance app? Feel free to connect with me:
-
-Email: [elhadramidev@gmail.com](mailto:elhadramidev@gmail.com)       |       Linkedin: [OUSSAMA EL HADRAMI](https://www.linkedin.com/in/elhadrami-oussama/)
 
 Happy coding! 🚀✨
 
