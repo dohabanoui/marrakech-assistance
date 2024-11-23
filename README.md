@@ -33,9 +33,7 @@ git clone git@github.com:same-ou/marrakech-assistance.git
 
 Have feedback, suggestions, or questions about the Marrakech Assistance app? Feel free to connect with me:
 
-- **Email**: [elhadramidev@gmail.com](mailto:elhadramidev@gmail.com)  
-- [dohabanoui1@gmail.com](mailto:dohabanoui1@gmail.com)  
-- **LinkedIn**: [OUSSAMA EL HADRAMI](https://www.linkedin.com/in/oussama-el-hadrami)  
-- [DOHA BANOUI](https://www.linkedin.com/in/doha-banoui-6bb205208/)
+- **Email**: [elhadramidev@gmail.com](mailto:elhadramidev@gmail.com) | [dohabanoui1@gmail.com](mailto:dohabanoui1@gmail.com)  
+- **LinkedIn**: [OUSSAMA EL HADRAMI](https://www.linkedin.com/in/oussama-el-hadrami) | [DOHA BANOUI](https://www.linkedin.com/in/doha-banoui-6bb205208/)
 
 Happy coding! 🚀✨
