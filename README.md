@@ -29,9 +29,9 @@ git clone git@github.com:same-ou/marrakech-assistance.git
 5. Run the App: Connect your Android device or use an emulator, then build and run the Marrakech Assistance app from Android Studio.
 6. Explore Categories: Once the app is running on your device, you can start exploring categories like restaurants, accommodations, and transport within the app.
 
-## Connect With Me
+## Connect With Us
 
-Have feedback, suggestions, or questions about the Marrakech Assistance app? Feel free to connect with me:
+Have feedback, suggestions, or questions about the Marrakech Assistance app? Feel free to connect with us:
 
 - **Email**: [elhadramidev@gmail.com](mailto:elhadramidev@gmail.com) | [dohabanoui1@gmail.com](mailto:dohabanoui1@gmail.com)  
 - **LinkedIn**: [OUSSAMA EL HADRAMI](https://www.linkedin.com/in/oussama-el-hadrami) | [DOHA BANOUI](https://www.linkedin.com/in/doha-banoui-6bb205208/)
